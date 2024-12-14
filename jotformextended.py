@@ -2,6 +2,8 @@ import requests
 
 
 class JotformExtendedClient:
+    """Extended Jotform API client for Python"""
+
     SUBDOMAINS = {"api": "api", "eu": "eu-api", "hipaa": "hipaa-api"}
     INTERNAL_SUBDOMAINS = {"api": "www", "eu": "eu", "hipaa": "hipaa"}
     # DEFAULT_SUB = "api"
@@ -15,7 +17,19 @@ class JotformExtendedClient:
     # add types
     # function for downloading files
 
-    def __init__(self, api_key="", subdomain="api", debug=False):
+    def __init__(self, api_key: str, subdomain: str = "api", debug: bool = False):
+        """Initialize a new instance of the Extended Jotform API client
+
+        Args:
+            api_key (str): Jotform API key.
+
+            subdomain (str, optional): Which subdomain to use for API calls. This will depend on the datacenter your Jotform account uses. These are the available options are `api`, `eu`, `hipaa`.
+                `api` (default): The default subdomain for Jotform API calls.
+                `eu`: Used by accounts that are on the European Datacenter.
+                `hipaa`: Used by accounts that have HIPAA compliance enabled.
+
+            debug (bool, optional): Enabled debug output, `False` by default.
+        """
         self.__api_key = api_key
         self.__is_debug = debug
         # self.__compliance = subdomain
@@ -44,6 +58,9 @@ class JotformExtendedClient:
             pass
 
     def get_user(self):
+        """
+        Get user account details for this Jotform user. Including user account type, avatar URL, name, email, website URL.
+        """
         return self.make_request("/user")
 
     def get_user_usage(self):
