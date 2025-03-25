@@ -1,3 +1,4 @@
+import json
 import requests
 
 
@@ -46,16 +47,14 @@ class JotformExtendedClient:
             headers["referer"] = self.__internal_base_url
         else:
             url = self.__base_url + api_path
+        if params:
+            response = requests.request(
+                method=method, url=url, headers=headers, params=params
+            )
+        else:
+            response = requests.request(method=method, url=url, headers=headers)
 
-        # do switch case
-        if method == "GET":
-            requests.get(url, headers=headers)
-        elif method == "POST":
-            pass
-        elif method == "PUT":
-            pass
-        elif method == "DELETE":
-            pass
+        return json.loads(response.text)
 
     def get_user(self):
         """
