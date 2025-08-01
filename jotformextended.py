@@ -133,8 +133,10 @@ class JotformExtendedClient:
         """
         return self.make_request("/user/history")
 
-    # GET /user/forms
     def get_user_forms(self):
+        """
+        Get forms owned by this Jotform account.
+        """
         return self.make_request("/user/forms")
 
     # POST /user/forms
