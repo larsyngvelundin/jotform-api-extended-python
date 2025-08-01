@@ -117,8 +117,10 @@ class JotformExtendedClient:
     def get_user_logout(self):
         return self.make_request("/user/logout")
 
-    # GET /user/settings
     def get_user_settings(self):
+        """
+        Get settings for this Jotform account.
+        """
         return self.make_request("/user/settings")
 
     # POST /user/settings
