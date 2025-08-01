@@ -70,6 +70,9 @@ class JotformExtendedClient:
         return self.make_request("/user")
 
     def get_user_usage(self):
+        """
+        Get monthly usage for submissions, forms, agents, and API.
+        """
         return self.make_request("/user/usage")
 
     # GET /user/submissions
