@@ -205,9 +205,11 @@ class JotformExtendedClient:
             f"/form/{form_id}/question/{field_id}", method="DELETE"
         )
 
-    # GET /form/{id}/properties
-    def get_form_properties(self):
-        return self.make_request("/form/{id}/properties")
+    def get_form_properties(self, form_id: str | int):
+        """
+        Get properties of a form.
+        """
+        return self.make_request(f"/form/{form_id}/properties")
 
     # POST /form/{id}/properties
     def post_form_properties(self):
