@@ -167,9 +167,11 @@ class JotformExtendedClient:
         """
         return self.make_request(f"/form/{form_id}", method="DELETE")
 
-    # POST /form/{id}/clone
-    def post_form_clone(self):
-        return self.make_request("/form/{id}/clone", method="POST")
+    def clone_form(self, form_id: str | int):
+        """
+        Clone a form.
+        """
+        return self.make_request(f"/form/{form_id}/clone", method="POST")
 
     # GET /form/{id}/questions
     def get_form_questions(self):
