@@ -127,8 +127,10 @@ class JotformExtendedClient:
     def post_user_settings(self):
         return self.make_request("/user/settings", method="POST")
 
-    # GET /user/history
     def get_user_history(self):
+        """
+        Get user activity log for this Jotform account.
+        """
         return self.make_request("/user/history")
 
     # GET /user/forms
