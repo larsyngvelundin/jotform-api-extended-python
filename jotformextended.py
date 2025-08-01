@@ -84,8 +84,13 @@ class JotformExtendedClient:
         """
         return self.make_request("/user/submissions")
 
-    # GET /user/subusers
     def get_user_subusers(self):
+        """
+        Get list of sub users of this Jotform account.
+
+        NOTE:
+            This is only available on legacy plans that were grand-fathered to keep this feature. Other accounts will receive 401.
+        """
         return self.make_request("/user/subusers")
 
     # GET /user/folders
