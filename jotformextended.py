@@ -61,6 +61,9 @@ class JotformExtendedClient:
         else:
             response = requests.request(method=method, url=url, headers=headers)
 
+        if self.__is_debug:
+            print(f"Request URL: {url}")
+
         return json.loads(response.text)
 
     def get_user(self):
