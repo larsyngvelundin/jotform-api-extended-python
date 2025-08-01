@@ -181,7 +181,7 @@ class JotformExtendedClient:
         return self.make_request("/form/{id}/properties", method="PUT")
 
     # GET /form/{id}/properties/{key}
-    def get_form_properties(self):
+    def get_form_properties_key(self):
         return self.make_request("/form/{id}/properties/{key}")
 
     # GET /form/{id}/reports
