@@ -197,9 +197,13 @@ class JotformExtendedClient:
     def post_form_question(self):
         return self.make_request("/form/{id}/question/{qid}", method="POST")
 
-    # DELETE /form/{id}/question/{qid}
-    def delete_form_question(self):
-        return self.make_request("/form/{id}/question/{qid}", method="DELETE")
+    def delete_form_field(self, form_id: str | int, field_id: str | int):
+        """
+        Delete a field.
+        """
+        return self.make_request(
+            f"/form/{form_id}/question/{field_id}", method="DELETE"
+        )
 
     # GET /form/{id}/properties
     def get_form_properties(self):
