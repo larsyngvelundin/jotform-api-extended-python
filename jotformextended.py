@@ -99,8 +99,10 @@ class JotformExtendedClient:
         """
         return self.make_request("/user/folders")
 
-    # GET /user/reports
     def get_user_reports(self):
+        """
+        Get list of reports on this Jotform account.
+        """
         return self.make_request("/user/reports")
 
     # POST /user/register
