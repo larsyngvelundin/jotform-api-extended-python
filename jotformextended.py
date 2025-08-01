@@ -1,5 +1,6 @@
 import json
 import requests
+from typing import Optional, Dict, Any
 
 
 class JotformExtendedClient:
@@ -39,7 +40,13 @@ class JotformExtendedClient:
         self.__internal_base_url += f"{self.INTERNAL_SUBDOMAINS[subdomain]}"
         self.__internal_base_url += ".jotform.com/API"
 
-    def make_request(self, api_path: str, method="GET", params=None, internal=False):
+    def make_request(
+        self,
+        api_path: str,
+        method: str = "GET",
+        params: Optional[Dict[str, str]] = None,
+        internal: bool = False,
+    ):
         # make check for api version
         headers = {"apiKey": self.__api_key}
         if internal:
