@@ -161,9 +161,11 @@ class JotformExtendedClient:
         """
         return self.make_request(f"/form/{id}")
 
-    # DELETE /form/{id}
-    def delete_form(self):
-        return self.make_request("/form/{id}", method="DELETE")
+    def trash_form(self, id: str | int):
+        """
+        Move a form to trash where it will be automatically deleted after 30 days.
+        """
+        return self.make_request(f"/form/{id}", method="DELETE")
 
     # POST /form/{id}/clone
     def post_form_clone(self):
