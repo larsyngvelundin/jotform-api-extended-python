@@ -175,7 +175,7 @@ class JotformExtendedClient:
 
     def get_form_fields(self, form_id: str | int):
         """
-        Get fields of a form.
+        Get fields and their properties.
         """
         return self.make_request(f"/form/{form_id}/questions")
 
@@ -187,9 +187,11 @@ class JotformExtendedClient:
     def put_form_questions(self):
         return self.make_request("/form/{id}/questions", method="PUT")
 
-    # GET /form/{id}/question/{qid}
-    def get_form_question(self):
-        return self.make_request("/form/{id}/question/{qid}")
+    def get_form_field(self, form_id: str | int, field_id: str | int):
+        """
+        Get properties for a specific field.
+        """
+        return self.make_request(f"/form/{form_id}/question/{field_id}")
 
     # POST /form/{id}/question/{qid}
     def post_form_question(self):
