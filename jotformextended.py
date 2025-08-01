@@ -173,9 +173,11 @@ class JotformExtendedClient:
         """
         return self.make_request(f"/form/{form_id}/clone", method="POST")
 
-    # GET /form/{id}/questions
-    def get_form_questions(self):
-        return self.make_request("/form/{id}/questions")
+    def get_form_fields(self, form_id: str | int):
+        """
+        Get fields of a form.
+        """
+        return self.make_request(f"/form/{form_id}/questions")
 
     # POST /form/{id}/questions
     def post_form_questions(self):
