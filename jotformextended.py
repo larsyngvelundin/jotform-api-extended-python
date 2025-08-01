@@ -155,9 +155,11 @@ class JotformExtendedClient:
     def put_form(self):
         return self.make_request("/form", method="PUT")
 
-    # GET /form/{id}
-    def get_form(self):
-        return self.make_request("/form/{id}")
+    def get_form(self, id: str | int):
+        """
+        Get basic information about a form.
+        """
+        return self.make_request(f"/form/{id}")
 
     # DELETE /form/{id}
     def delete_form(self):
