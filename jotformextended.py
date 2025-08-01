@@ -78,8 +78,10 @@ class JotformExtendedClient:
         """
         return self.make_request("/user/usage")
 
-    # GET /user/submissions
     def get_user_submissions(self):
+        """
+        Get list of submissions made by this Jotform account.
+        """
         return self.make_request("/user/submissions")
 
     # GET /user/subusers
