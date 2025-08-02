@@ -297,10 +297,20 @@ class JotformExtendedClient:
         """
         return self.make_request(f"/submission/{submission_id}", method="DELETE")
 
+    def get_report(self, report_id: str | int):
+        """
+        Get a report.
+        """
+        return self.make_request(f"/report/{report_id}")
 
-# GET /report/{id}
+    def delete_report(self, report_id: str | int):
+        """
+        Delete a report.
 
-# DELETE /report/{id}
+        Note: It will NOT be trashed, it will be permanently deleted.
+        """
+        return self.make_request(f"/report/{report_id}", method="DELETE")
+
 
 # GET /folder/{id}
 
