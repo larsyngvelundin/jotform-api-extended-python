@@ -257,9 +257,13 @@ class JotformExtendedClient:
             f"/form/{form_id}/webhooks", method="POST", params=payload
         )
 
-    # DELETE /form/{id}/webhooks/{whid}
-    def delete_form_webhooks(self):
-        return self.make_request("/form/{id}/webhooks/{whid}", method="DELETE")
+    def delete_form_webhook(self, form_id: str | int, webhook_id: str | int):
+        """
+        Delete a webhook on a form.
+        """
+        return self.make_request(
+            f"/form/{form_id}/webhooks/{webhook_id}", method="DELETE"
+        )
 
     # GET /form/{id}/submissions
     def get_form_submissions(self):
