@@ -265,9 +265,11 @@ class JotformExtendedClient:
             f"/form/{form_id}/webhooks/{webhook_id}", method="DELETE"
         )
 
-    # GET /form/{id}/submissions
-    def get_form_submissions(self):
-        return self.make_request("/form/{id}/submissions")
+    def get_form_submissions(self, form_id: str | int):
+        """
+        Get submissions of a form.
+        """
+        return self.make_request(f"/form/{form_id}/submissions")
 
     # POST /form/{id}/submissions
     def post_form_submissions(self):
