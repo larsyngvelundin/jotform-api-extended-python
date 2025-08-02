@@ -63,6 +63,7 @@ class JotformExtendedClient:
 
         if self.__is_debug:
             print(f"Request URL: {url}")
+            print(f"Method: {method}")
 
         return json.loads(response.text)
 
