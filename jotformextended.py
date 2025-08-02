@@ -311,13 +311,35 @@ class JotformExtendedClient:
         """
         return self.make_request(f"/report/{report_id}", method="DELETE")
 
+    def get_folder(self, folder_id: str):
+        """
+        Get a folder and its contents.
+        """
+        return self.make_request(f"/folder/{folder_id}")
 
-# GET /folder/{id}
+    def create_folder(
+        self,
+        folder_name: str,
+        parent_folder_id: Optional[str] = None,
+        folder_color: Optional[str] = None,
+    ):
+        """
+        Create a folder.
+        """
+        payload = {
+            "name": folder_name,
+            "parent": parent_folder_id,
+            "color": folder_color,
+        }
+        return self.make_request("/folder", method="POST", params=payload)
 
-# POST /folder
+    # PUT /folder/{id}
 
-# PUT /folder/{id}
+    def delete_folder(self, folder_id: str):
+        """
+        Delete a folder.
+        """
+        return self.make_request(f"/folder/{folder_id}", method="DELETE")
 
-# DELETE /folder/{id}
 
 # GET /system/plan/{planName}
