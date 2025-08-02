@@ -241,9 +241,11 @@ class JotformExtendedClient:
         """
         return self.make_request(f"/form/{form_id}/files")
 
-    # GET /form/{id}/webhooks
-    def get_form_webhooks(self):
-        return self.make_request("/form/{id}/webhooks")
+    def get_form_webhooks(self, form_id: str | int):
+        """
+        Get list of webhooks of a form.
+        """
+        return self.make_request(f"/form/{form_id}/webhooks")
 
     def add_form_webhook(self, form_id: str | int, webhook_url: str):
         """
