@@ -225,9 +225,11 @@ class JotformExtendedClient:
         """
         return self.make_request(f"/form/{form_id}/properties/{key}")
 
-    # GET /form/{id}/reports
-    def get_form_reports(self):
-        return self.make_request("/form/{id}/reports")
+    def get_form_reports(self, form_id: str | int):
+        """
+        Get list of reports of a form.
+        """
+        return self.make_request(f"/form/{form_id}/reports")
 
     # POST /form/{id}/reports
     def post_form_reports(self):
