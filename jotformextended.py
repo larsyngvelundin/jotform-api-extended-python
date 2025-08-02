@@ -279,14 +279,20 @@ class JotformExtendedClient:
     def put_form_submissions(self):
         return self.make_request("/form/{id}/submissions", method="PUT")
 
-    # GET /submission/{id}
-    def get_submission(self):
-        return self.make_request("/submission/{id}")
+    def get_submission(self, submission_id: str | int):
+        """
+        Get a submission.
+        """
+        return self.make_request(f"/submission/{submission_id}")
 
     # POST /submission/{id}
     def post_submission(self):
         return self.make_request("/submission/{id}", method="POST")
 
-    # DELETE /submission/{id}
-    def delete_submission(self):
-        return self.make_request("/submission/{id}", method="DELETE")
+    def delete_submission(self, submission_id: str | int):
+        """
+        Delete a submission.
+
+        Note: It will NOT be trashed, it will be permanently deleted.
+        """
+        return self.make_request(f"/submission/{submission_id}", method="DELETE")
