@@ -326,7 +326,7 @@ class JotformExtendedClient:
         """
         Create a folder.
         """
-        payload = {
+        payload: dict[str, Any] = {
             "name": folder_name,
             "parent": parent_folder_id,
             "color": folder_color,
