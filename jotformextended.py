@@ -296,3 +296,18 @@ class JotformExtendedClient:
         Note: It will NOT be trashed, it will be permanently deleted.
         """
         return self.make_request(f"/submission/{submission_id}", method="DELETE")
+
+
+# GET /report/{id}
+
+# DELETE /report/{id}
+
+# GET /folder/{id}
+
+# POST /folder
+
+# PUT /folder/{id}
+
+# DELETE /folder/{id}
+
+# GET /system/plan/{planName}
