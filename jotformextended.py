@@ -341,5 +341,8 @@ class JotformExtendedClient:
         """
         return self.make_request(f"/folder/{folder_id}", method="DELETE")
 
-
-# GET /system/plan/{planName}
+    def get_plan(self, plan_name: str):
+        """
+        Get usage limits and pricing for a plan.
+        """
+        return self.make_request(f"/system/plan/{plan_name}")
