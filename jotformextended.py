@@ -235,9 +235,11 @@ class JotformExtendedClient:
     def post_form_reports(self):
         return self.make_request("/form/{id}/reports", method="POST")
 
-    # GET /form/{id}/files
-    def get_form_files(self):
-        return self.make_request("/form/{id}/files")
+    def get_form_files(self, form_id: str | int):
+        """
+        Get list of files uploaded in a form's submissions.
+        """
+        return self.make_request(f"/form/{form_id}/files")
 
     # GET /form/{id}/webhooks
     def get_form_webhooks(self):
