@@ -401,3 +401,12 @@ class JotformExtendedClient:
         Get the thread of a submission.
         """
         return self.make_request(f"/submission/{submission_id}/thread")
+
+    def check_bounce_list(self, email: str):
+        """
+        Check if your email is in the bouncelist.
+        """
+        payload = {"email": email}
+        return self.make_request(
+            f"/server/check-bounce-list?", method="POST", params=payload, internal=True
+        )
