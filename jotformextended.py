@@ -402,6 +402,24 @@ class JotformExtendedClient:
         """
         return self.make_request(f"/submission/{submission_id}/thread")
 
+    def generate_pdf(
+        self,
+        form_id: str | int,
+        submission_id: str | int,
+        pdf_id: Optional[str | int] = None,
+        download: Optional[str | int] = 0,
+    ):
+        """
+        Generate a submission PDF.
+        """
+        pdf_data: dict[str, Any] = {
+            "formid": form_id,
+            "submissionid": submission_id,
+            "reportid": pdf_id,
+            "download": download,
+        }
+        return self.make_request("/generatePDF", params=pdf_data)
+
     def get_sender_emails(self):
         """
         Get sender emails on this Jotform account.
