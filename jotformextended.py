@@ -188,10 +188,6 @@ class JotformExtendedClient:
             f"/form/{form_id}/questions", method="POST", params=field
         )
 
-    # PUT /form/{id}/questions
-    def put_form_questions(self):
-        return self.make_request("/form/{id}/questions", method="PUT")
-
     def get_form_field(self, form_id: str | int, field_id: str | int):
         """
         Get properties for a specific field.
@@ -219,10 +215,6 @@ class JotformExtendedClient:
     # POST /form/{id}/properties
     def post_form_properties(self):
         return self.make_request("/form/{id}/properties", method="POST")
-
-    # PUT /form/{id}/properties
-    def put_form_properties(self):
-        return self.make_request("/form/{id}/properties", method="PUT")
 
     def get_form_property(self, form_id: str | int, key: str):
         """
@@ -279,10 +271,6 @@ class JotformExtendedClient:
     def post_form_submissions(self):
         return self.make_request("/form/{id}/submissions", method="POST")
 
-    # PUT /form/{id}/submissions
-    def put_form_submissions(self):
-        return self.make_request("/form/{id}/submissions", method="PUT")
-
     def get_submission(self, submission_id: str | int):
         """
         Get a submission.
@@ -336,8 +324,6 @@ class JotformExtendedClient:
             "color": folder_color,
         }
         return self.make_request("/folder", method="POST", params=payload)
-
-    # PUT /folder/{id}
 
     def delete_folder(self, folder_id: str):
         """
