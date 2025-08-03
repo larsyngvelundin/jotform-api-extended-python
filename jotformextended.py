@@ -420,6 +420,18 @@ class JotformExtendedClient:
         }
         return self.make_request("/generatePDF", params=pdf_data)
 
+    def get_agents(self):
+        """
+        Get a list of AI Agents on this Jotform account.
+        """
+        return self.make_request("/ai-agent-builder/agents")
+
+    def get_agent(self, agent_id: str):
+        """
+        Get an AI Agent.
+        """
+        return self.make_request(f"/ai-agent-builder/agents/{agent_id}")
+
     def get_sender_emails(self):
         """
         Get sender emails on this Jotform account.
