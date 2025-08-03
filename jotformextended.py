@@ -106,10 +106,6 @@ class JotformExtendedClient:
         """
         return self.make_request("/user/reports")
 
-    # POST /user/register
-    def post_user_register(self):
-        return self.make_request("/user/register", method="POST")
-
     # POST /user/login
     def post_user_login(self):
         return self.make_request("/user/login", method="POST")
