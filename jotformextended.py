@@ -371,3 +371,15 @@ class JotformExtendedClient:
         Get usage limits and pricing for a plan.
         """
         return self.make_request(f"/system/plan/{plan_name}")
+
+    def get_apps(self):
+        """
+        Get a list of apps with basic information on this Jotform account.
+        """
+        return self.make_request("/user/portals")
+
+    def get_app(self, app_id: str | int):
+        """
+        Get detailsed information on a specific app.
+        """
+        return self.make_request(f"/portal/{app_id}")
