@@ -106,13 +106,25 @@ class JotformExtendedClient:
         """
         return self.make_request("/user/reports")
 
-    # POST /user/login
-    def post_user_login(self):
-        return self.make_request("/user/login", method="POST")
+    def login(
+        self, username: str, password: str, app_name: str = "", access: str = "full"
+    ):
+        """
+        Login with given details
+        """
+        payload: dict[str, Any] = {
+            "username": username,
+            "password": password,
+            "appName": app_name,
+            "access": access,
+        }
+        return self.make_request("/user/login", method="POST", params=payload)
 
-    # GET /user/logout
-    def get_user_logout(self):
-        return self.make_request("/user/logout")
+    def logout(self):
+        """
+        Log out
+        """
+        return self.make_request("/v1/user/logout")
 
     def get_user_settings(self):
         """
