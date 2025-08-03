@@ -401,3 +401,9 @@ class JotformExtendedClient:
         Get the thread of a submission.
         """
         return self.make_request(f"/submission/{submission_id}/thread")
+
+    def get_sender_emails(self):
+        """
+        Get sender emails on this Jotform account.
+        """
+        return self.make_request("/smtpConfig/user/all")
