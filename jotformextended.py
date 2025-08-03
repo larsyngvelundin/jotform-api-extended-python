@@ -218,9 +218,13 @@ class JotformExtendedClient:
         """
         return self.make_request(f"/form/{form_id}/properties")
 
-    # POST /form/{id}/properties
-    def post_form_properties(self):
-        return self.make_request("/form/{id}/properties", method="POST")
+    def update_form_properties(self, form_id: str | int, properties: dict[str, str]):
+        """
+        Update form properties.
+        """
+        return self.make_request(
+            f"/form/{form_id}/properties", method="POST", params=properties
+        )
 
     def get_form_property(self, form_id: str | int, key: str):
         """
