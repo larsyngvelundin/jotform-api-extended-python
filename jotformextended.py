@@ -383,3 +383,15 @@ class JotformExtendedClient:
         Get detailsed information on a specific app.
         """
         return self.make_request(f"/portal/{app_id}")
+
+    def archive_form(self, form_id: str | int):
+        """
+        Archive a form.
+        """
+        return self.make_request(f"/form/{form_id}/archive?archive=1", method="POST")
+
+    def unarchive_form(self, form_id: str | int):
+        """
+        Unarchive a form.
+        """
+        return self.make_request(f"/form/{form_id}/archive?archive=0", method="POST")
