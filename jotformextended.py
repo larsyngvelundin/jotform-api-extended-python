@@ -292,9 +292,13 @@ class JotformExtendedClient:
         """
         return self.make_request(f"/form/{form_id}/submissions")
 
-    # POST /form/{id}/submissions
-    def post_form_submissions(self):
-        return self.make_request("/form/{id}/submissions", method="POST")
+    def create_submission(self, form_id: str | int, submission_data: dict[str, str]):
+        """
+        Create a submission.
+        """
+        return self.make_request(
+            f"/form/{form_id}/submissions", method="POST", params=submission_data
+        )
 
     def get_submission(self, submission_id: str | int):
         """
