@@ -306,9 +306,15 @@ class JotformExtendedClient:
         """
         return self.make_request(f"/submission/{submission_id}")
 
-    # POST /submission/{id}
-    def post_submission(self):
-        return self.make_request("/submission/{id}", method="POST")
+    def update_submission(
+        self, submission_id: str | int, submission_data: dict[str, str]
+    ):
+        """
+        Edit a submission.
+        """
+        return self.make_request(
+            f"/submission/{submission_id}", method="POST", params=submission_data
+        )
 
     def delete_submission(self, submission_id: str | int):
         """
