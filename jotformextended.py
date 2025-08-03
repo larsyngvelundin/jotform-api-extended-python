@@ -132,9 +132,11 @@ class JotformExtendedClient:
         """
         return self.make_request("/user/settings")
 
-    # POST /user/settings
-    def post_user_settings(self):
-        return self.make_request("/user/settings", method="POST")
+    def update_user_settings(self, settings: dict[str, str]):
+        """
+        Update user settings
+        """
+        return self.make_request("/user/settings", method="POST", params=settings)
 
     def get_user_history(self):
         """
