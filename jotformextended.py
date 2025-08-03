@@ -150,14 +150,6 @@ class JotformExtendedClient:
         """
         return self.make_request("/user/forms")
 
-    # POST /user/forms
-    def post_user_forms(self):
-        return self.make_request("/user/forms", method="POST")
-
-    # PUT /user/forms
-    def put_user_forms(self):
-        return self.make_request("/user/forms", method="PUT")
-
     # POST /form
     def post_form(self):
         return self.make_request("/form", method="POST")
