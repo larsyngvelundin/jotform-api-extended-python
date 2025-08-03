@@ -8,16 +8,6 @@ class JotformExtendedClient:
 
     SUBDOMAINS = {"api": "api", "eu": "eu-api", "hipaa": "hipaa-api"}
     INTERNAL_SUBDOMAINS = {"api": "www", "eu": "eu", "hipaa": "hipaa"}
-    # DEFAULT_SUB = "api"
-    # EU_SUB = "eu-api"
-    # HIPAA_SUB = "hipaa-api"
-    # DEFAULT_INTERNAL = ""
-    # DEFAULT_EU = "eu"
-    # DEFAULT_HIPAA = "hipaa"
-
-    # set base url based on selection
-    # add types
-    # function for downloading files
 
     def __init__(self, api_key: str, subdomain: str = "api", debug: bool = False):
         """Initialize a new instance of the Extended Jotform API client
@@ -34,7 +24,6 @@ class JotformExtendedClient:
         """
         self.__api_key = api_key
         self.__is_debug = debug
-        # self.__compliance = subdomain
         self.__base_url = f"https://{self.SUBDOMAINS[subdomain]}.jotform.com"
         self.__internal_base_url = "https://"
         self.__internal_base_url += f"{self.INTERNAL_SUBDOMAINS[subdomain]}"
@@ -47,7 +36,6 @@ class JotformExtendedClient:
         params: Optional[Dict[str, str]] = None,
         internal: bool = False,
     ):
-        # make check for api version
         headers = {"apiKey": self.__api_key}
         if internal:
             url = self.__internal_base_url + api_path
