@@ -194,9 +194,15 @@ class JotformExtendedClient:
         """
         return self.make_request(f"/form/{form_id}/question/{field_id}")
 
-    # POST /form/{id}/question/{qid}
-    def post_form_question(self):
-        return self.make_request("/form/{id}/question/{qid}", method="POST")
+    def update_form_field(
+        self, form_id: str | int, field_id: str | int, field_details: dict[str, str]
+    ):
+        """
+        Update a form field.
+        """
+        return self.make_request(
+            f"/form/{form_id}/question/{field_id}", method="POST", params=field_details
+        )
 
     def delete_form_field(self, form_id: str | int, field_id: str | int):
         """
