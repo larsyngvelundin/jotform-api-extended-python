@@ -20,4 +20,3 @@ JotForm API Extended - Python Client
 | PDFs | ❌ | ✔️ |
 | AI Agents | ❌ | ✔️ |
 | SMTP | ❌ | ✔️ |
-| Bounce List | ❌ | ✔️ |
