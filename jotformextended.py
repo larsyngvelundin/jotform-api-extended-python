@@ -180,9 +180,13 @@ class JotformExtendedClient:
         """
         return self.make_request(f"/form/{form_id}/questions")
 
-    # POST /form/{id}/questions
-    def post_form_questions(self):
-        return self.make_request("/form/{id}/questions", method="POST")
+    def add_form_field(self, form_id: str | int, field: dict[str, str]):
+        """
+        Add a field to a form.
+        """
+        return self.make_request(
+            f"/form/{form_id}/questions", method="POST", params=field
+        )
 
     # PUT /form/{id}/questions
     def put_form_questions(self):
