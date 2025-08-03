@@ -395,3 +395,9 @@ class JotformExtendedClient:
         Unarchive a form.
         """
         return self.make_request(f"/form/{form_id}/archive?archive=0", method="POST")
+
+    def get_submission_thread(self, submission_id: str | int):
+        """
+        Get the thread of a submission.
+        """
+        return self.make_request(f"/submission/{submission_id}/thread")
