@@ -238,9 +238,24 @@ class JotformExtendedClient:
         """
         return self.make_request(f"/form/{form_id}/reports")
 
-    # POST /form/{id}/reports
-    def post_form_reports(self):
-        return self.make_request("/form/{id}/reports", method="POST")
+    def create_report(
+        self,
+        form_id: str | int,
+        report_title: str,
+        report_type: str,
+        fields: Optional[str] = None,
+    ):
+        """
+        Create a report.
+        """
+        report_data: dict[str, Any] = {
+            "title": report_title,
+            "list_type": report_type,
+            "fields": fields,
+        }
+        return self.make_request(
+            f"/form/{form_id}/reports", method="POST", params=report_data
+        )
 
     def get_form_files(self, form_id: str | int):
         """
