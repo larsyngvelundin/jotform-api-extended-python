@@ -28,7 +28,7 @@ class JotformExtendedClient:
         self.__internal_base_url += f"{self.INTERNAL_SUBDOMAINS[subdomain]}"
         self.__internal_base_url += ".jotform.com/API"
 
-    def make_request(
+    def _make_request(
         self,
         api_path: str,
         method: str = "GET",
@@ -58,19 +58,19 @@ class JotformExtendedClient:
         """
         Get user account details for this Jotform user. Including user account type, avatar URL, name, email, website URL.
         """
-        return self.make_request("/user")
+        return self._make_request("/user")
 
     def get_usage(self):
         """
         Get monthly usage for submissions, forms, agents, and API.
         """
-        return self.make_request("/user/usage")
+        return self._make_request("/user/usage")
 
     def get_user_submissions(self):
         """
         Get list of submissions made by this Jotform account.
         """
-        return self.make_request("/user/submissions")
+        return self._make_request("/user/submissions")
 
     def get_user_subusers(self):
         """
@@ -79,19 +79,19 @@ class JotformExtendedClient:
         NOTE:
             This is only available on legacy plans that were grand-fathered to keep this feature. Other accounts will receive 401.
         """
-        return self.make_request("/user/subusers")
+        return self._make_request("/user/subusers")
 
     def get_user_folders(self):
         """
         Get list of folders on this Jotform account.
         """
-        return self.make_request("/user/folders")
+        return self._make_request("/user/folders")
 
     def get_user_reports(self):
         """
         Get list of reports on this Jotform account.
         """
-        return self.make_request("/user/reports")
+        return self._make_request("/user/reports")
 
     def login(
         self, username: str, password: str, app_name: str = "", access: str = "full"
@@ -105,73 +105,73 @@ class JotformExtendedClient:
             "appName": app_name,
             "access": access,
         }
-        return self.make_request("/user/login", method="POST", params=payload)
+        return self._make_request("/user/login", method="POST", params=payload)
 
     def logout(self):
         """
         Log out
         """
-        return self.make_request("/v1/user/logout")
+        return self._make_request("/v1/user/logout")
 
     def get_user_settings(self):
         """
         Get settings for this Jotform account.
         """
-        return self.make_request("/user/settings")
+        return self._make_request("/user/settings")
 
     def update_user_settings(self, settings: dict[str, str]):
         """
         Update user settings
         """
-        return self.make_request("/user/settings", method="POST", params=settings)
+        return self._make_request("/user/settings", method="POST", params=settings)
 
     def get_user_history(self):
         """
         Get user activity log for this Jotform account.
         """
-        return self.make_request("/user/history")
+        return self._make_request("/user/history")
 
     def get_user_forms(self):
         """
         Get forms owned by this Jotform account.
         """
-        return self.make_request("/user/forms")
+        return self._make_request("/user/forms")
 
     def create_form(self, form: dict[str, str]):
         """
         Create a form.
         """
-        return self.make_request("/form", method="POST", params=form)
+        return self._make_request("/form", method="POST", params=form)
 
     def get_form(self, form_id: str | int):
         """
         Get basic information about a form.
         """
-        return self.make_request(f"/form/{form_id}")
+        return self._make_request(f"/form/{form_id}")
 
     def trash_form(self, form_id: str | int):
         """
         Move a form to trash where it will be automatically deleted after 30 days.
         """
-        return self.make_request(f"/form/{form_id}", method="DELETE")
+        return self._make_request(f"/form/{form_id}", method="DELETE")
 
     def clone_form(self, form_id: str | int):
         """
         Clone a form.
         """
-        return self.make_request(f"/form/{form_id}/clone", method="POST")
+        return self._make_request(f"/form/{form_id}/clone", method="POST")
 
     def get_form_fields(self, form_id: str | int):
         """
         Get fields and their properties.
         """
-        return self.make_request(f"/form/{form_id}/questions")
+        return self._make_request(f"/form/{form_id}/questions")
 
     def add_form_field(self, form_id: str | int, field: dict[str, str]):
         """
         Add a field to a form.
         """
-        return self.make_request(
+        return self._make_request(
             f"/form/{form_id}/questions", method="POST", params=field
         )
 
@@ -179,7 +179,7 @@ class JotformExtendedClient:
         """
         Get properties for a specific field.
         """
-        return self.make_request(f"/form/{form_id}/question/{field_id}")
+        return self._make_request(f"/form/{form_id}/question/{field_id}")
 
     def update_form_field(
         self, form_id: str | int, field_id: str | int, field_details: dict[str, str]
@@ -187,7 +187,7 @@ class JotformExtendedClient:
         """
         Update a form field.
         """
-        return self.make_request(
+        return self._make_request(
             f"/form/{form_id}/question/{field_id}", method="POST", params=field_details
         )
 
@@ -195,7 +195,7 @@ class JotformExtendedClient:
         """
         Delete a field.
         """
-        return self.make_request(
+        return self._make_request(
             f"/form/{form_id}/question/{field_id}", method="DELETE"
         )
 
@@ -203,13 +203,13 @@ class JotformExtendedClient:
         """
         Get properties of a form.
         """
-        return self.make_request(f"/form/{form_id}/properties")
+        return self._make_request(f"/form/{form_id}/properties")
 
     def update_form_properties(self, form_id: str | int, properties: dict[str, str]):
         """
         Update form properties.
         """
-        return self.make_request(
+        return self._make_request(
             f"/form/{form_id}/properties", method="POST", params=properties
         )
 
@@ -217,13 +217,13 @@ class JotformExtendedClient:
         """
         Get a specific property of a form.
         """
-        return self.make_request(f"/form/{form_id}/properties/{key}")
+        return self._make_request(f"/form/{form_id}/properties/{key}")
 
     def get_form_reports(self, form_id: str | int):
         """
         Get list of reports of a form.
         """
-        return self.make_request(f"/form/{form_id}/reports")
+        return self._make_request(f"/form/{form_id}/reports")
 
     def create_report(
         self,
@@ -240,7 +240,7 @@ class JotformExtendedClient:
             "list_type": report_type,
             "fields": fields,
         }
-        return self.make_request(
+        return self._make_request(
             f"/form/{form_id}/reports", method="POST", params=report_data
         )
 
@@ -248,20 +248,20 @@ class JotformExtendedClient:
         """
         Get list of files uploaded in a form's submissions.
         """
-        return self.make_request(f"/form/{form_id}/files")
+        return self._make_request(f"/form/{form_id}/files")
 
     def get_form_webhooks(self, form_id: str | int):
         """
         Get list of webhooks of a form.
         """
-        return self.make_request(f"/form/{form_id}/webhooks")
+        return self._make_request(f"/form/{form_id}/webhooks")
 
     def add_form_webhook(self, form_id: str | int, webhook_url: str):
         """
         Add a webhook to a form.
         """
         payload = {"webhookURL": webhook_url}
-        return self.make_request(
+        return self._make_request(
             f"/form/{form_id}/webhooks", method="POST", params=payload
         )
 
@@ -269,7 +269,7 @@ class JotformExtendedClient:
         """
         Delete a webhook on a form.
         """
-        return self.make_request(
+        return self._make_request(
             f"/form/{form_id}/webhooks/{webhook_id}", method="DELETE"
         )
 
@@ -277,13 +277,13 @@ class JotformExtendedClient:
         """
         Get submissions of a form.
         """
-        return self.make_request(f"/form/{form_id}/submissions")
+        return self._make_request(f"/form/{form_id}/submissions")
 
     def create_submission(self, form_id: str | int, submission_data: dict[str, str]):
         """
         Create a submission.
         """
-        return self.make_request(
+        return self._make_request(
             f"/form/{form_id}/submissions", method="POST", params=submission_data
         )
 
@@ -291,7 +291,7 @@ class JotformExtendedClient:
         """
         Get a submission.
         """
-        return self.make_request(f"/submission/{submission_id}")
+        return self._make_request(f"/submission/{submission_id}")
 
     def update_submission(
         self, submission_id: str | int, submission_data: dict[str, str]
@@ -299,7 +299,7 @@ class JotformExtendedClient:
         """
         Edit a submission.
         """
-        return self.make_request(
+        return self._make_request(
             f"/submission/{submission_id}", method="POST", params=submission_data
         )
 
@@ -309,13 +309,13 @@ class JotformExtendedClient:
 
         Note: It will NOT be trashed, it will be permanently deleted.
         """
-        return self.make_request(f"/submission/{submission_id}", method="DELETE")
+        return self._make_request(f"/submission/{submission_id}", method="DELETE")
 
     def get_report(self, report_id: str | int):
         """
         Get a report.
         """
-        return self.make_request(f"/report/{report_id}")
+        return self._make_request(f"/report/{report_id}")
 
     def delete_report(self, report_id: str | int):
         """
@@ -323,13 +323,13 @@ class JotformExtendedClient:
 
         Note: It will NOT be trashed, it will be permanently deleted.
         """
-        return self.make_request(f"/report/{report_id}", method="DELETE")
+        return self._make_request(f"/report/{report_id}", method="DELETE")
 
     def get_folder(self, folder_id: str):
         """
         Get a folder and its contents.
         """
-        return self.make_request(f"/folder/{folder_id}")
+        return self._make_request(f"/folder/{folder_id}")
 
     def create_folder(
         self,
@@ -345,49 +345,49 @@ class JotformExtendedClient:
             "parent": parent_folder_id,
             "color": folder_color,
         }
-        return self.make_request("/folder", method="POST", params=payload)
+        return self._make_request("/folder", method="POST", params=payload)
 
     def delete_folder(self, folder_id: str):
         """
         Delete a folder.
         """
-        return self.make_request(f"/folder/{folder_id}", method="DELETE")
+        return self._make_request(f"/folder/{folder_id}", method="DELETE")
 
     def get_plan(self, plan_name: str):
         """
         Get usage limits and pricing for a plan.
         """
-        return self.make_request(f"/system/plan/{plan_name}")
+        return self._make_request(f"/system/plan/{plan_name}")
 
     def get_apps(self):
         """
         Get a list of apps with basic information on this Jotform account.
         """
-        return self.make_request("/user/portals")
+        return self._make_request("/user/portals")
 
     def get_app(self, app_id: str | int):
         """
         Get detailsed information on a specific app.
         """
-        return self.make_request(f"/portal/{app_id}")
+        return self._make_request(f"/portal/{app_id}")
 
     def archive_form(self, form_id: str | int):
         """
         Archive a form.
         """
-        return self.make_request(f"/form/{form_id}/archive?archive=1", method="POST")
+        return self._make_request(f"/form/{form_id}/archive?archive=1", method="POST")
 
     def unarchive_form(self, form_id: str | int):
         """
         Unarchive a form.
         """
-        return self.make_request(f"/form/{form_id}/archive?archive=0", method="POST")
+        return self._make_request(f"/form/{form_id}/archive?archive=0", method="POST")
 
     def get_submission_thread(self, submission_id: str | int):
         """
         Get the thread of a submission.
         """
-        return self.make_request(f"/submission/{submission_id}/thread")
+        return self._make_request(f"/submission/{submission_id}/thread")
 
     def generate_pdf(
         self,
@@ -405,22 +405,22 @@ class JotformExtendedClient:
             "reportid": pdf_id,
             "download": download,
         }
-        return self.make_request("/generatePDF", params=pdf_data)
+        return self._make_request("/generatePDF", params=pdf_data)
 
     def get_agents(self):
         """
         Get a list of AI Agents on this Jotform account.
         """
-        return self.make_request("/ai-agent-builder/agents")
+        return self._make_request("/ai-agent-builder/agents")
 
     def get_agent(self, agent_id: str):
         """
         Get an AI Agent.
         """
-        return self.make_request(f"/ai-agent-builder/agents/{agent_id}")
+        return self._make_request(f"/ai-agent-builder/agents/{agent_id}")
 
     def get_sender_emails(self):
         """
         Get sender emails on this Jotform account.
         """
-        return self.make_request("/smtpConfig/user/all")
+        return self._make_request("/smtpConfig/user/all")
