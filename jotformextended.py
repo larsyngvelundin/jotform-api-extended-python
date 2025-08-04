@@ -136,7 +136,16 @@ class JotformExtendedClient:
         self, username: str, password: str, app_name: str = "", access: str = "full"
     ):
         """
-        Login with given details
+        Logs in a user with the provided credentials.
+
+        Args:
+            username (str): The username of the Jotform account.
+            password (str): The password for the account.
+            app_name (str, optional): The name of the application making the login request. Defaults to an empty string.
+            access (str, optional): The access level requested, e.g., "full" (default) or "readOnly".
+
+        Returns:
+            dict: The response from the login API, typically including authentication tokens or user info.
         """
         payload: dict[str, Any] = {
             "username": username,
@@ -148,19 +157,32 @@ class JotformExtendedClient:
 
     def logout(self):
         """
-        Log out
+        Logs out the current user from the Jotform account.
+
+        Returns:
+            dict: The response from the logout API, typically indicating success or failure.
         """
         return self._make_request("/v1/user/logout")
 
     def get_user_settings(self):
         """
-        Get settings for this Jotform account.
+        Retrieves settings for the current Jotform account, such as username, time zone, email, and account status.
+
+        Returns:
+            dict: A dictionary containing user settings and account details.
         """
         return self._make_request("/user/settings")
 
     def update_user_settings(self, settings: dict[str, str]):
         """
-        Update user settings
+        Updates the settings for the current Jotform account.
+
+        Args:
+            settings (dict[str, str]): A dictionary of user settings to update, where keys are setting names and values are the corresponding new values.
+                The available keys can be obtained from the `get_user_settings` method.
+
+        Returns:
+            dict: The response from the API indicating the result of the update operation.
         """
         return self._make_request("/user/settings", method="POST", params=settings)
 
