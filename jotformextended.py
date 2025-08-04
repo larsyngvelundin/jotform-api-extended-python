@@ -35,6 +35,17 @@ class JotformExtendedClient:
         params: Optional[Dict[str, str]] = None,
         internal: bool = False,
     ):
+        """Send an HTTP request to the specified API endpoint.
+
+        Args:
+            api_path (str): Relative API path (e.g., "/user/submissions").
+            method (str, optional): HTTP method to use ('GET', 'POST', etc.). Defaults to 'GET'.
+            params (dict, optional): HTTP query parameters to include in the request. Defaults to None.
+            internal (bool, optional): If True, use the internal base URL and set a referer header. Defaults to False.
+
+        Returns:
+            dict: Parsed JSON response from the API.
+        """
         headers = {"apiKey": self.__api_key}
         if internal:
             url = self.__internal_base_url + api_path
@@ -56,40 +67,68 @@ class JotformExtendedClient:
 
     def get_user(self):
         """
-        Get user account details for this Jotform user. Including user account type, avatar URL, name, email, website URL.
+        Retrieves account details for the current Jotform user.
+
+        Returns:
+            dict: A dictionary containing user account details, such as:
+                - account type
+                - avatar URL
+                - name
+                - email
+                - website URL
         """
         return self._make_request("/user")
 
     def get_usage(self):
         """
-        Get monthly usage for submissions, forms, agents, and API.
+        Retrieves current monthly usage statistics for the user's account.
+
+        Returns:
+            dict: A dictionary containing usage details, including:
+                - total and remaining submissions
+                - form count
+                - agent usage
+                - API usage
         """
         return self._make_request("/user/usage")
 
     def get_user_submissions(self):
         """
-        Get list of submissions made by this Jotform account.
+        Retrieves a list of submissions made by the current Jotform account.
+
+        Returns:
+            dict: A dictionary containing a list of submission records submitted by the user.
         """
         return self._make_request("/user/submissions")
 
     def get_user_subusers(self):
         """
-        Get list of sub users of this Jotform account.
+        Retrieves a list of sub-users associated with this Jotform account.
 
-        NOTE:
-            This is only available on legacy plans that were grand-fathered to keep this feature. Other accounts will receive 401.
+        Note:
+            This feature is only available on legacy plans that were grandfathered to keep it.
+            Other accounts will receive a 401 Unauthorized error.
+
+        Returns:
+            dict: A dictionary containing the list of sub-user accounts.
         """
         return self._make_request("/user/subusers")
 
     def get_user_folders(self):
         """
-        Get list of folders on this Jotform account.
+        Retrieves a list of folders in the current Jotform account.
+
+        Returns:
+            dict: A dictionary containing folder information for the user.
         """
         return self._make_request("/user/folders")
 
     def get_user_reports(self):
         """
-        Get list of reports on this Jotform account.
+        Retrieves a list of reports associated with the current Jotform account.
+
+        Returns:
+            dict: A dictionary containing information about the user's reports.
         """
         return self._make_request("/user/reports")
 
