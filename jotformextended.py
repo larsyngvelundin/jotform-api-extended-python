@@ -10,17 +10,16 @@ class JotformExtendedClient:
     INTERNAL_SUBDOMAINS = {"api": "www", "eu": "eu", "hipaa": "hipaa"}
 
     def __init__(self, api_key: str, subdomain: str = "api", debug: bool = False):
-        """Initialize a new instance of the Extended Jotform API client
+        """Initialize an Extended Jotform API client.
 
         Args:
             api_key (str): Jotform API key.
-
-            subdomain (str, optional): Which subdomain to use for API calls. This will depend on the datacenter your Jotform account uses. These are the available options are `api`, `eu`, `hipaa`.
-                `api` (default): The default subdomain for Jotform API calls.
-                `eu`: Used by accounts that are on the European Datacenter.
-                `hipaa`: Used by accounts that have HIPAA compliance enabled.
-
-            debug (bool, optional): Enabled debug output, `False` by default.
+            subdomain (str, optional): Subdomain to use for API calls; determines the datacenter (default: 'api').
+                Available options are:
+                    - 'api': Default subdomain for general Jotform API calls.
+                    - 'eu': Use for accounts on the European Datacenter.
+                    - 'hipaa': Use for HIPAA-compliant accounts.
+            debug (bool, optional): Enable debug output (default: False).
         """
         self.__api_key = api_key
         self.__is_debug = debug
