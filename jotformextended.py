@@ -207,6 +207,12 @@ class JotformExtendedClient:
     def get_form(self, form_id: str | int):
         """
         Get basic information about a form.
+
+        Args:
+            form_id (str or int): ID of the form.
+
+        Returns:
+            dict: Parsed JSON response from the API.
         """
         return self._make_request(f"/form/{form_id}")
 
