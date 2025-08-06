@@ -188,7 +188,10 @@ class JotformExtendedClient:
 
     def get_user_history(self):
         """
-        Get user activity log for this Jotform account.
+        Retrieve the user activity log for the current Jotform account.
+
+        Returns:
+            dict: Parsed JSON response from the API containing the user activity log and related details.
         """
         return self._make_request("/user/history")
 
