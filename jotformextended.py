@@ -596,9 +596,16 @@ class JotformExtendedClient:
 
     def delete_report(self, report_id: str | int):
         """
-        Delete a report.
+        Permanently delete a specific report.
 
-        Note: It will NOT be trashed, it will be permanently deleted.
+        Note:
+            The report will NOT be moved to trash; it will be permanently deleted.
+
+        Args:
+            report_id (str or int): The ID of the report to delete.
+
+        Returns:
+            dict: Parsed JSON response from the API confirming the deletion of the report.
         """
         return self._make_request(f"/report/{report_id}", method="DELETE")
 
