@@ -611,7 +611,13 @@ class JotformExtendedClient:
 
     def get_folder(self, folder_id: str):
         """
-        Get a folder and its contents.
+        Retrieve a specific folder and its contents.
+
+        Args:
+            folder_id (str): The ID of the folder to retrieve.
+
+        Returns:
+            dict: Parsed JSON response from the API containing details of the folder and its contents.
         """
         return self._make_request(f"/folder/{folder_id}")
 
