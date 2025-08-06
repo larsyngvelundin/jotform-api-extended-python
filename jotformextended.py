@@ -197,7 +197,10 @@ class JotformExtendedClient:
 
     def get_user_forms(self):
         """
-        Get forms owned by this Jotform account.
+        Retrieve a list of forms owned by the current Jotform account.
+
+        Returns:
+            dict: Parsed JSON response from the API containing the list of forms and their details.
         """
         return self._make_request("/user/forms")
 
