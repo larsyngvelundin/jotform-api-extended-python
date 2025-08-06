@@ -776,6 +776,9 @@ class JotformExtendedClient:
 
     def get_sender_emails(self):
         """
-        Get sender emails on this Jotform account.
+        Retrieve the list of sender email addresses configured for the current Jotform account.
+
+        Returns:
+            dict: Parsed JSON response from the API containing the list of sender emails and their details.
         """
         return self._make_request("/smtpConfig/user/all")
