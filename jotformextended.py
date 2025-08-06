@@ -449,7 +449,14 @@ class JotformExtendedClient:
 
     def delete_form_webhook(self, form_id: str | int, webhook_id: str | int):
         """
-        Delete a webhook on a form.
+        Delete a specific webhook from a form.
+
+        Args:
+            form_id (str or int): The ID of the form from which the webhook will be deleted.
+            webhook_id (str or int): The ID of the webhook to delete.
+
+        Returns:
+            dict: Parsed JSON response from the API confirming the deletion of the webhook.
         """
         return self._make_request(
             f"/form/{form_id}/webhooks/{webhook_id}", method="DELETE"
