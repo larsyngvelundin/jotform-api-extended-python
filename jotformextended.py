@@ -359,11 +359,18 @@ class JotformExtendedClient:
             f"/form/{form_id}/properties", method="POST", params=properties
         )
 
-    def get_form_property(self, form_id: str | int, key: str):
+    def get_form_property(self, form_id: str | int, property: str):
         """
-        Get a specific property of a form.
+        Retrieve a specific property of a form by its key.
+
+        Args:
+            form_id (str or int): The ID of the form whose property is being requested.
+            property (str): The key/name of the property to retrieve.
+
+        Returns:
+            dict: Parsed JSON response from the API containing the value of the specified form property.
         """
-        return self._make_request(f"/form/{form_id}/properties/{key}")
+        return self._make_request(f"/form/{form_id}/properties/{property}")
 
     def get_form_reports(self, form_id: str | int):
         """
