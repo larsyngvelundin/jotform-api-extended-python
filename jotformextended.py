@@ -207,14 +207,50 @@ class JotformExtendedClient:
         """
         return self._make_request("/user/settings", method="POST", params=settings)
 
-    def get_user_history(self):
+    def get_user_history(
+        self,
+        date: Optional[str] = None,
+        start_date: Optional[str] = None,
+        end_date: Optional[str] = None,
+        activity_type: str = "all",
+        sort_by: str = "ASC",
+    ):
         """
-        Retrieve the user activity log for the current Jotform account.
+        Retrieve the user activity log for the current Jotform account with filtering and sorting options.
+
+        Args:
+            date (str, optional): A predefined date range to filter activities.
+                Supported values are:
+                    "lastWeek", "lastMonth", "last3Months", "last6Months", "lastYear", "all".
+                    Cannot be used simultaneously with start_date and end_date. Defaults to None.
+            start_date (str, optional): The start date (inclusive) to filter activities, in MM/DD/YYYY format.
+                Cannot be used simultaneously with the `date` parameter. Defaults to None.
+            end_date (str, optional): The end date (inclusive) to filter activities, in MM/DD/YYYY format.
+                Must be provided along with `start_date` if used. Defaults to None.
+            activity_type (str, optional): The type of activity to retrieve. Supported values are:
+                "all" (includes other unsupported types, like emails),
+                "userCreation", "userLogin", "formCreation", "formUpdate", "formDelete", "formPurge".
+                Defaults to "all".
+            sort_by (str, optional): The sort order of the results by date.
+                Supported values are "ASC" for ascending and "DESC" for descending. Defaults to "ASC".
 
         Returns:
             dict: Parsed JSON response from the API containing the user activity log and related details.
+
+        Note:
+            - `date` is mutually exclusive with `start_date` and `end_date`.
+            - If using `start_date` and `end_date`, both must be provided.
         """
-        return self._make_request("/user/history")
+        payload: dict[str, Any] = {}
+        if date:
+            payload["date"] = date
+        else:
+            if start_date and end_date:
+                payload["startDate"] = start_date
+                payload["endDate"] = end_date
+        payload["type"] = activity_type
+        payload["sortBy"] = sort_by
+        return self._make_request("/user/history", params=payload)
 
     def get_user_forms(self):
         """
