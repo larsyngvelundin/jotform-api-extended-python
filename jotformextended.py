@@ -218,7 +218,13 @@ class JotformExtendedClient:
 
     def trash_form(self, form_id: str | int):
         """
-        Move a form to trash where it will be automatically deleted after 30 days.
+        Move a form to the trash, where it will be automatically deleted after 30 days.
+
+        Args:
+            form_id (str or int): The ID of the form to move to trash.
+
+        Returns:
+            dict: Parsed JSON response from the API.
         """
         return self._make_request(f"/form/{form_id}", method="DELETE")
 
