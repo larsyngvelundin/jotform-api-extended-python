@@ -764,7 +764,13 @@ class JotformExtendedClient:
 
     def get_agent(self, agent_id: str):
         """
-        Get an AI Agent.
+        Retrieve detailed information about a specific AI Agent by its ID.
+
+        Args:
+            agent_id (str): The ID of the AI Agent to retrieve.
+
+        Returns:
+            dict: Parsed JSON response from the API containing detailed information about the specified AI Agent.
         """
         return self._make_request(f"/ai-agent-builder/agents/{agent_id}")
 
