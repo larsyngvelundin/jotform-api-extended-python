@@ -339,7 +339,21 @@ class JotformExtendedClient:
 
     def update_form_properties(self, form_id: str | int, properties: dict[str, str]):
         """
-        Update form properties.
+        Update the properties of a specific form.
+
+        Args:
+            form_id (str or int): The ID of the form to update.
+            properties (dict[str, str]): A dictionary of form properties to update.
+                Example structure:
+                    {
+                        "properties[background]": "#FFEEDD",
+                        "properties[title]": "New Form Title",
+                        "properties[thankurl]": "http://www.newthankyoupage.com",
+                        "properties[activeRedirect]": "thankurl",
+                    }
+
+        Returns:
+            dict: Parsed JSON response from the API confirming the update and showing the updated form properties.
         """
         return self._make_request(
             f"/form/{form_id}/properties", method="POST", params=properties
