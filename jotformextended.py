@@ -584,7 +584,13 @@ class JotformExtendedClient:
 
     def get_report(self, report_id: str | int):
         """
-        Get a report.
+        Retrieve the details of a specific report by its ID.
+
+        Args:
+            report_id (str or int): The ID of the report to retrieve.
+
+        Returns:
+            dict: Parsed JSON response from the API containing the details of the specified report.
         """
         return self._make_request(f"/report/{report_id}")
 
