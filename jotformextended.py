@@ -230,7 +230,13 @@ class JotformExtendedClient:
 
     def clone_form(self, form_id: str | int):
         """
-        Clone a form.
+        Create a clone of an existing form.
+
+        Args:
+            form_id (str or int): The ID of the form to clone.
+
+        Returns:
+            dict: Parsed JSON response from the API, containing details of the cloned form, including the Form ID.
         """
         return self._make_request(f"/form/{form_id}/clone", method="POST")
 
