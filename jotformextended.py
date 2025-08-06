@@ -706,7 +706,13 @@ class JotformExtendedClient:
 
     def unarchive_form(self, form_id: str | int):
         """
-        Unarchive a form.
+        Unarchive a specific form.
+
+        Args:
+            form_id (str or int): The ID of the form to be unarchived.
+
+        Returns:
+            dict: Parsed JSON response from the API confirming the form has been unarchived.
         """
         return self._make_request(f"/form/{form_id}/archive?archive=0", method="POST")
 
