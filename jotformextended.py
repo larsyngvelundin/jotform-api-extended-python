@@ -464,7 +464,13 @@ class JotformExtendedClient:
 
     def get_form_submissions(self, form_id: str | int):
         """
-        Get submissions of a form.
+        Retrieve submissions of a specific form.
+
+        Args:
+            form_id (str or int): The ID of the form whose submissions are being requested.
+
+        Returns:
+            dict: Parsed JSON response from the API containing the form submissions.
         """
         return self._make_request(f"/form/{form_id}/submissions")
 
