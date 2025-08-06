@@ -433,7 +433,14 @@ class JotformExtendedClient:
 
     def add_form_webhook(self, form_id: str | int, webhook_url: str):
         """
-        Add a webhook to a form.
+        Add a webhook URL to a specific form.
+
+        Args:
+            form_id (str or int): The ID of the form to which the webhook will be added.
+            webhook_url (str): The URL of the webhook to add.
+
+        Returns:
+            dict: Parsed JSON response from the API confirming the addition of the webhook and containing its details.
         """
         payload = {"webhookURL": webhook_url}
         return self._make_request(
