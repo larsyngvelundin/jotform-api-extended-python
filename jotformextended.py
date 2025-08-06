@@ -386,7 +386,17 @@ class JotformExtendedClient:
         fields: Optional[str] = None,
     ):
         """
-        Create a report.
+        Create a report for a specific form.
+
+        Args:
+            form_id (str or int): The ID of the form for which the report is created.
+            report_title (str): The title of the report.
+            report_type (str): The type of report to create. Supported types are:
+                'csv', 'excel', 'grid', 'table', 'rss'.
+            fields (Optional[str], optional): Comma-separated string specifying which fields to include in the report. Defaults to None. Example: "ip,dt,1,3,4"
+
+        Returns:
+            dict: Parsed JSON response from the API containing details of the created report.
         """
         report_data: dict[str, Any] = {
             "title": report_title,
