@@ -254,7 +254,21 @@ class JotformExtendedClient:
 
     def add_form_field(self, form_id: str | int, field: dict[str, str]):
         """
-        Add a field to a form.
+        Add a new field to a form.
+
+        Args:
+            form_id (str or int): The ID of the form to which the field will be added.
+            field (dict[str, str]): Dictionary containing the field properties to add.
+                Example structure:
+                    {
+                        "question[type]": "control_head",
+                        "question[text]": "Form Title",
+                        "question[order]": "1",
+                        "question[name]": "myheader",
+                    }
+
+        Returns:
+            dict: Parsed JSON response from the API confirming the addition and details of the new field.
         """
         return self._make_request(
             f"/form/{form_id}/questions", method="POST", params=field
