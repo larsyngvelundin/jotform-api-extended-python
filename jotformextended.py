@@ -660,7 +660,14 @@ class JotformExtendedClient:
 
     def get_plan(self, plan_name: str):
         """
-        Get usage limits and pricing for a plan.
+        Retrieve usage limits and pricing details for a specific plan.
+
+        Args:
+            plan_name (str): The name of the plan whose usage limits and pricing are being requested.
+                Supported values are: "FREE", "BRONZE", "SILVER", "GOLD", "PLATINUM".
+
+        Returns:
+            dict: Parsed JSON response from the API containing usage limits, pricing, and other details of the specified plan.
         """
         return self._make_request(f"/system/plan/{plan_name}")
 
