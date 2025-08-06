@@ -534,9 +534,16 @@ class JotformExtendedClient:
 
     def delete_submission(self, submission_id: str | int):
         """
-        Delete a submission.
+        Permanently delete a specific submission.
 
-        Note: It will NOT be trashed, it will be permanently deleted.
+        Note:
+            The submission will NOT be moved to trash; it will be permanently deleted.
+
+        Args:
+            submission_id (str or int): The ID of the submission to delete.
+
+        Returns:
+            dict: Parsed JSON response from the API confirming the deletion of the submission.
         """
         return self._make_request(f"/submission/{submission_id}", method="DELETE")
 
