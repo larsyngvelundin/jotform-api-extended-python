@@ -31,7 +31,7 @@ API coverage:
 | SMTP | ❌ | ✔️ |
 
 ## Installing
-You can install the extended client using::
+You can install the extended client using:
 
       $ pip install jotform-extended
 
