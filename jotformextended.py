@@ -92,14 +92,35 @@ class JotformExtendedClient:
         """
         return self._make_request("/user/usage")
 
-    def get_user_submissions(self):
+    def get_user_submissions(
+        self,
+        offset: str | int = 0,
+        limit: str | int = 20,
+        filter: str = "{}",
+        orderby: str = "id",
+    ):
         """
-        Retrieves a list of submissions made by the current Jotform account.
+        Retrieve a list of submissions made by the current Jotform account with pagination, filtering, and sorting options.
+
+        Args:
+            offset (str or int, optional): The starting position of the submissions to retrieve for pagination. Defaults to 0.
+            limit (str or int, optional): The maximum number of submissions to retrieve. Defaults to 20. Maximum is 1000.
+            filter (str, optional): A JSON string used to filter submissions.
+                For example: '{"formIDs":["242943775123456"]}'. Defaults to an empty filter '{}'.
+            orderby (str, optional): The field by which to sort the submissions.
+                Supported values are: 'id', 'form_id', 'IP', 'created_at', 'status', 'new', 'flag', 'updated_at'.
+                Defaults to 'id'.
 
         Returns:
-            dict: A dictionary containing a list of submission records submitted by the user.
+            dict: Parsed JSON response from the API containing a dictionary with a list of submission records submitted by the user.
         """
-        return self._make_request("/user/submissions")
+        payload: dict[str, str] = {
+            "offset": str(offset),
+            "limit": str(limit),
+            "filter": filter,
+            "orderby": orderby,
+        }
+        return self._make_request("/user/submissions", params=payload)
 
     def get_user_subusers(self):
         """
@@ -186,23 +207,80 @@ class JotformExtendedClient:
         """
         return self._make_request("/user/settings", method="POST", params=settings)
 
-    def get_user_history(self):
+    def get_user_history(
+        self,
+        date: Optional[str] = None,
+        start_date: Optional[str] = None,
+        end_date: Optional[str] = None,
+        activity_type: str = "all",
+        sort_by: str = "ASC",
+    ):
         """
-        Retrieve the user activity log for the current Jotform account.
+        Retrieve the user activity log for the current Jotform account with filtering and sorting options.
+
+        Args:
+            date (str, optional): A predefined date range to filter activities.
+                Supported values are:
+                    "lastWeek", "lastMonth", "last3Months", "last6Months", "lastYear", "all".
+                    Cannot be used simultaneously with start_date and end_date. Defaults to None.
+            start_date (str, optional): The start date (inclusive) to filter activities, in MM/DD/YYYY format.
+                Cannot be used simultaneously with the `date` parameter. Defaults to None.
+            end_date (str, optional): The end date (inclusive) to filter activities, in MM/DD/YYYY format.
+                Must be provided along with `start_date` if used. Defaults to None.
+            activity_type (str, optional): The type of activity to retrieve. Supported values are:
+                "all" (includes other unsupported types, like emails),
+                "userCreation", "userLogin", "formCreation", "formUpdate", "formDelete", "formPurge".
+                Defaults to "all".
+            sort_by (str, optional): The sort order of the results by date.
+                Supported values are "ASC" for ascending and "DESC" for descending. Defaults to "ASC".
 
         Returns:
             dict: Parsed JSON response from the API containing the user activity log and related details.
-        """
-        return self._make_request("/user/history")
 
-    def get_user_forms(self):
+        Note:
+            - `date` is mutually exclusive with `start_date` and `end_date`.
+            - If using `start_date` and `end_date`, both must be provided.
+        """
+        payload: dict[str, Any] = {}
+        if date:
+            payload["date"] = date
+        else:
+            if start_date and end_date:
+                payload["startDate"] = start_date
+                payload["endDate"] = end_date
+        payload["type"] = activity_type
+        payload["sortBy"] = sort_by
+        return self._make_request("/user/history", params=payload)
+
+    def get_user_forms(
+        self,
+        offset: str | int = 0,
+        limit: str | int = 20,
+        filter: str = "{}",
+        orderby: str = "id",
+    ):
         """
         Retrieve a list of forms owned by the current Jotform account.
+
+        Args:
+            offset (str or int, optional): The starting position of the forms to retrieve for pagination. Defaults to 0.
+            limit (str or int, optional): The maximum number of forms to retrieve. Defaults to 20. Maximum is 1000.
+            filter (str, optional): A JSON string used to filter forms.
+                For example: '{"created_at:gt":"2025-01-01 00:00:00"}'. Defaults to an empty filter '{}'.
+            orderby (str, optional): The field by which to sort the forms.
+                Supported values are: 'id', 'username', 'title', 'status', 'created_at', 'updated_at', 'new' (unread submission count), 'count' (submission count), 'slug'.
+                Defaults to 'id'.
 
         Returns:
             dict: Parsed JSON response from the API containing the list of forms and their details.
         """
-        return self._make_request("/user/forms")
+        payload: dict[str, str] = {
+            "offset": str(offset),
+            "limit": str(limit),
+            "filter": filter,
+            "orderby": orderby,
+        }
+        return self._make_request("/user/forms", params=payload)
 
     def create_form(self, form: dict[str, str]):
         """
@@ -497,17 +575,37 @@ class JotformExtendedClient:
             f"/form/{form_id}/webhooks/{webhook_id}", method="DELETE"
         )
 
-    def get_form_submissions(self, form_id: str | int):
+    def get_form_submissions(
+        self,
+        form_id: str | int,
+        offset: str | int = 0,
+        limit: str | int = 20,
+        filter: str = "{}",
+        orderby: str = "id",
+    ):
         """
         Retrieve submissions of a specific form.
 
         Args:
             form_id (str or int): The ID of the form whose submissions are being requested.
+            offset (str or int, optional): The starting position of the submissions to retrieve for pagination. Defaults to 0.
+            limit (str or int, optional): The maximum number of submissions to retrieve. Defaults to 20. Maximum is 1000.
+            filter (str, optional): A JSON string used to filter submissions.
+                For example: '{"created_at:gt":"2025-01-01 00:00:00"}'. Defaults to an empty filter '{}'.
+            orderby (str, optional): The field by which to sort the submissions.
+                Supported values are: 'id', 'IP', 'created_at', 'status', 'new', 'flag', 'updated_at'.
+                Defaults to 'id'.
 
         Returns:
             dict: Parsed JSON response from the API containing the form submissions.
         """
-        return self._make_request(f"/form/{form_id}/submissions")
+        payload: dict[str, str] = {
+            "offset": str(offset),
+            "limit": str(limit),
+            "filter": filter,
+            "orderby": orderby,
+        }
+        return self._make_request(f"/form/{form_id}/submissions", params=payload)
 
     def create_submission(self, form_id: str | int, submission_data: dict[str, str]):
         """
