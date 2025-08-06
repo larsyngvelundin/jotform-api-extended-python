@@ -252,14 +252,35 @@ class JotformExtendedClient:
         payload["sortBy"] = sort_by
         return self._make_request("/user/history", params=payload)
 
-    def get_user_forms(self):
+    def get_user_forms(
+        self,
+        offset: str | int = 0,
+        limit: str | int = 20,
+        filter: str = "{}",
+        orderby: str = "id",
+    ):
         """
         Retrieve a list of forms owned by the current Jotform account.
+
+        Args:
+            offset (str or int, optional): The starting position of the forms to retrieve for pagination. Defaults to 0.
+            limit (str or int, optional): The maximum number of forms to retrieve. Defaults to 20. Maximum is 1000.
+            filter (str, optional): A JSON string used to filter forms.
+                For example: '{"created_at:gt":"2025-01-01 00:00:00"}'. Defaults to an empty filter '{}'.
+            orderby (str, optional): The field by which to sort the forms.
+                Supported values are: 'id', 'username', 'title', 'status', 'created_at', 'updated_at', 'new' (unread submission count), 'count' (submission count), 'slug'.
+                Defaults to 'id'.
 
         Returns:
             dict: Parsed JSON response from the API containing the list of forms and their details.
         """
-        return self._make_request("/user/forms")
+        payload: dict[str, str] = {
+            "offset": str(offset),
+            "limit": str(limit),
+            "filter": filter,
+            "orderby": orderby,
+        }
+        return self._make_request("/user/forms", params=payload)
 
     def create_form(self, form: dict[str, str]):
         """
