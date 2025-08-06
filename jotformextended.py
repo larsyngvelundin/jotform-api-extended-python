@@ -682,7 +682,13 @@ class JotformExtendedClient:
 
     def get_app(self, app_id: str | int):
         """
-        Get detailsed information on a specific app.
+        Retrieve detailed information about a specific app.
+
+        Args:
+            app_id (str or int): The ID of the app to retrieve.
+
+        Returns:
+            dict: Parsed JSON response from the API containing detailed information about the specified app.
         """
         return self._make_request(f"/portal/{app_id}")
 
