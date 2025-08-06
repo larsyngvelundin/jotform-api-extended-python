@@ -694,7 +694,13 @@ class JotformExtendedClient:
 
     def archive_form(self, form_id: str | int):
         """
-        Archive a form.
+        Archive a specific form.
+
+        Args:
+            form_id (str or int): The ID of the form to be archived.
+
+        Returns:
+            dict: Parsed JSON response from the API confirming the form has been archived.
         """
         return self._make_request(f"/form/{form_id}/archive?archive=1", method="POST")
 
