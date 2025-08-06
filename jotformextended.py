@@ -409,7 +409,13 @@ class JotformExtendedClient:
 
     def get_form_files(self, form_id: str | int):
         """
-        Get list of files uploaded in a form's submissions.
+        Retrieve a list of files uploaded through a form's submissions.
+
+        Args:
+            form_id (str or int): The ID of the form whose uploaded files are being requested.
+
+        Returns:
+            dict: Parsed JSON response from the API containing the list of uploaded files and their details.
         """
         return self._make_request(f"/form/{form_id}/files")
 
