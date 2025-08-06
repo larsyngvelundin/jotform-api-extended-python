@@ -206,7 +206,30 @@ class JotformExtendedClient:
 
     def create_form(self, form: dict[str, str]):
         """
-        Create a form.
+        Create a new form with the specified properties, questions, and email notifications.
+
+        Args:
+            form (dict[str, str]): A dictionary containing the form's properties, questions, and emails to be set at creation.
+                Example structure:
+                    {
+                        "properties[title]": "Form Title",
+                        "questions[0][type]": "control_head",
+                        "questions[0][text]": "Form Header",
+                        "questions[0][order]": "1",
+                        "questions[1][type]": "control_textbox",
+                        "questions[1][text]": "Text Box Label",
+                        "questions[1][order]": "2",
+                        "questions[1][required]": "Yes",
+                        "questions[1][readonly]": "No",
+                        "emails[0][type]": "notification",
+                        "emails[0][name]": "Notification 1",
+                        "emails[0][from]": "default",
+                        "emails[0][to]": "example@example.com",
+                        "emails[0][subject]": "New Submission Received",
+                    }
+
+        Returns:
+            dict: Parsed JSON response from the API containing details of the newly created form, including the Form ID.
         """
         return self._make_request("/form", method="POST", params=form)
 
