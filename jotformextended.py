@@ -673,7 +673,10 @@ class JotformExtendedClient:
 
     def get_apps(self):
         """
-        Get a list of apps with basic information on this Jotform account.
+        Retrieve a list of apps with basic information available for the current Jotform account.
+
+        Returns:
+            dict: Parsed JSON response from the API containing the list of apps and their basic details.
         """
         return self._make_request("/user/portals")
 
