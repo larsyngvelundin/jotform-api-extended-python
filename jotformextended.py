@@ -718,7 +718,13 @@ class JotformExtendedClient:
 
     def get_submission_thread(self, submission_id: str | int):
         """
-        Get the thread of a submission.
+        Retrieve the thread (workflow updates, comments, emails) associated with a specific submission.
+
+        Args:
+            submission_id (str or int): The ID of the submission whose thread is being requested.
+
+        Returns:
+            dict: Parsed JSON response from the API containing the thread details for the specified submission.
         """
         return self._make_request(f"/submission/{submission_id}/thread")
 
