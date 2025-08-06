@@ -628,7 +628,16 @@ class JotformExtendedClient:
         folder_color: Optional[str] = None,
     ):
         """
-        Create a folder.
+        Create a new folder with the specified name, optionally under a parent folder, and with a specified folder color.
+
+        Args:
+            folder_name (str): The name of the folder to create.
+            parent_folder_id (str, optional): The ID of the parent folder under which to create the new folder.
+                If None, the folder will be created at the root level. Defaults to None.
+            folder_color (str, optional): A hex color code (e.g., "#FFFFFF") to assign to the folder. Defaults to None.
+
+        Returns:
+            dict: Parsed JSON response from the API containing details of the created folder.
         """
         payload: dict[str, Any] = {
             "name": folder_name,
