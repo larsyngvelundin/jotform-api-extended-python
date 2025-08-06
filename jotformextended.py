@@ -34,7 +34,7 @@ class JotformExtendedClient:
         method: str = "GET",
         params: Optional[Dict[str, str]] = None,
         internal: bool = False,
-    ):
+    ) -> dict[str, Any]:
         """Send an HTTP request to the specified API endpoint.
 
         Args:
@@ -65,7 +65,7 @@ class JotformExtendedClient:
 
         return json.loads(response.text)
 
-    def get_user(self):
+    def get_user(self) -> dict[str, Any]:
         """
         Retrieves account details for the current Jotform user.
 
@@ -79,7 +79,7 @@ class JotformExtendedClient:
         """
         return self._make_request("/user")
 
-    def get_usage(self):
+    def get_usage(self) -> dict[str, Any]:
         """
         Retrieves current monthly usage statistics for the user's account.
 
@@ -98,7 +98,7 @@ class JotformExtendedClient:
         limit: str | int = 20,
         filter: str = "{}",
         orderby: str = "id",
-    ):
+    ) -> dict[str, Any]:
         """
         Retrieve a list of submissions made by the current Jotform account with pagination, filtering, and sorting options.
 
@@ -122,7 +122,7 @@ class JotformExtendedClient:
         }
         return self._make_request("/user/submissions", params=payload)
 
-    def get_user_subusers(self):
+    def get_user_subusers(self) -> dict[str, Any]:
         """
         Retrieves a list of sub-users associated with this Jotform account.
 
@@ -135,7 +135,7 @@ class JotformExtendedClient:
         """
         return self._make_request("/user/subusers")
 
-    def get_user_folders(self):
+    def get_user_folders(self) -> dict[str, Any]:
         """
         Retrieves a list of folders in the current Jotform account.
 
@@ -144,7 +144,7 @@ class JotformExtendedClient:
         """
         return self._make_request("/user/folders")
 
-    def get_user_reports(self):
+    def get_user_reports(self) -> dict[str, Any]:
         """
         Retrieves a list of reports associated with the current Jotform account.
 
@@ -155,7 +155,7 @@ class JotformExtendedClient:
 
     def login(
         self, username: str, password: str, app_name: str = "", access: str = "full"
-    ):
+    ) -> dict[str, Any]:
         """
         Logs in a user with the provided credentials.
 
@@ -176,7 +176,7 @@ class JotformExtendedClient:
         }
         return self._make_request("/user/login", method="POST", params=payload)
 
-    def logout(self):
+    def logout(self) -> dict[str, Any]:
         """
         Logs out the current user from the Jotform account.
 
@@ -185,7 +185,7 @@ class JotformExtendedClient:
         """
         return self._make_request("/v1/user/logout")
 
-    def get_user_settings(self):
+    def get_user_settings(self) -> dict[str, Any]:
         """
         Retrieves settings for the current Jotform account, such as username, time zone, email, and account status.
 
@@ -194,7 +194,7 @@ class JotformExtendedClient:
         """
         return self._make_request("/user/settings")
 
-    def update_user_settings(self, settings: dict[str, str]):
+    def update_user_settings(self, settings: dict[str, str]) -> dict[str, Any]:
         """
         Updates the settings for the current Jotform account.
 
@@ -214,7 +214,7 @@ class JotformExtendedClient:
         end_date: Optional[str] = None,
         activity_type: str = "all",
         sort_by: str = "ASC",
-    ):
+    ) -> dict[str, Any]:
         """
         Retrieve the user activity log for the current Jotform account with filtering and sorting options.
 
@@ -258,7 +258,7 @@ class JotformExtendedClient:
         limit: str | int = 20,
         filter: str = "{}",
         orderby: str = "id",
-    ):
+    ) -> dict[str, Any]:
         """
         Retrieve a list of forms owned by the current Jotform account.
 
@@ -282,7 +282,7 @@ class JotformExtendedClient:
         }
         return self._make_request("/user/forms", params=payload)
 
-    def create_form(self, form: dict[str, str]):
+    def create_form(self, form: dict[str, str]) -> dict[str, Any]:
         """
         Create a new form with the specified properties, questions, and email notifications.
 
@@ -311,7 +311,7 @@ class JotformExtendedClient:
         """
         return self._make_request("/form", method="POST", params=form)
 
-    def get_form(self, form_id: str | int):
+    def get_form(self, form_id: str | int) -> dict[str, Any]:
         """
         Get basic information about a form.
 
@@ -323,7 +323,7 @@ class JotformExtendedClient:
         """
         return self._make_request(f"/form/{form_id}")
 
-    def trash_form(self, form_id: str | int):
+    def trash_form(self, form_id: str | int) -> dict[str, Any]:
         """
         Move a form to the trash, where it will be automatically deleted after 30 days.
 
@@ -335,7 +335,7 @@ class JotformExtendedClient:
         """
         return self._make_request(f"/form/{form_id}", method="DELETE")
 
-    def clone_form(self, form_id: str | int):
+    def clone_form(self, form_id: str | int) -> dict[str, Any]:
         """
         Create a clone of an existing form.
 
@@ -347,7 +347,7 @@ class JotformExtendedClient:
         """
         return self._make_request(f"/form/{form_id}/clone", method="POST")
 
-    def get_form_fields(self, form_id: str | int):
+    def get_form_fields(self, form_id: str | int) -> dict[str, Any]:
         """
         Retrieve all fields and their properties for a specific form.
 
@@ -359,7 +359,9 @@ class JotformExtendedClient:
         """
         return self._make_request(f"/form/{form_id}/questions")
 
-    def add_form_field(self, form_id: str | int, field: dict[str, str]):
+    def add_form_field(
+        self, form_id: str | int, field: dict[str, str]
+    ) -> dict[str, Any]:
         """
         Add a new field to a form.
 
@@ -381,7 +383,7 @@ class JotformExtendedClient:
             f"/form/{form_id}/questions", method="POST", params=field
         )
 
-    def get_form_field(self, form_id: str | int, field_id: str | int):
+    def get_form_field(self, form_id: str | int, field_id: str | int) -> dict[str, Any]:
         """
         Retrieve properties of a specific field within a form.
 
@@ -396,7 +398,7 @@ class JotformExtendedClient:
 
     def update_form_field(
         self, form_id: str | int, field_id: str | int, field_details: dict[str, str]
-    ):
+    ) -> dict[str, Any]:
         """
         Update the properties of a specific field within a form.
 
@@ -417,7 +419,9 @@ class JotformExtendedClient:
             f"/form/{form_id}/question/{field_id}", method="POST", params=field_details
         )
 
-    def delete_form_field(self, form_id: str | int, field_id: str | int):
+    def delete_form_field(
+        self, form_id: str | int, field_id: str | int
+    ) -> dict[str, Any]:
         """
         Delete a specific field from a form.
 
@@ -432,7 +436,7 @@ class JotformExtendedClient:
             f"/form/{form_id}/question/{field_id}", method="DELETE"
         )
 
-    def get_form_properties(self, form_id: str | int):
+    def get_form_properties(self, form_id: str | int) -> dict[str, Any]:
         """
         Retrieve the properties of a specific form.
 
@@ -444,7 +448,9 @@ class JotformExtendedClient:
         """
         return self._make_request(f"/form/{form_id}/properties")
 
-    def update_form_properties(self, form_id: str | int, properties: dict[str, str]):
+    def update_form_properties(
+        self, form_id: str | int, properties: dict[str, str]
+    ) -> dict[str, Any]:
         """
         Update the properties of a specific form.
 
@@ -466,7 +472,7 @@ class JotformExtendedClient:
             f"/form/{form_id}/properties", method="POST", params=properties
         )
 
-    def get_form_property(self, form_id: str | int, property: str):
+    def get_form_property(self, form_id: str | int, property: str) -> dict[str, Any]:
         """
         Retrieve a specific property of a form by its key.
 
@@ -479,7 +485,7 @@ class JotformExtendedClient:
         """
         return self._make_request(f"/form/{form_id}/properties/{property}")
 
-    def get_form_reports(self, form_id: str | int):
+    def get_form_reports(self, form_id: str | int) -> dict[str, Any]:
         """
         Retrieve a list of reports associated with a specific form.
 
@@ -497,7 +503,7 @@ class JotformExtendedClient:
         report_title: str,
         report_type: str,
         fields: Optional[str] = None,
-    ):
+    ) -> dict[str, Any]:
         """
         Create a report for a specific form.
 
@@ -520,7 +526,7 @@ class JotformExtendedClient:
             f"/form/{form_id}/reports", method="POST", params=report_data
         )
 
-    def get_form_files(self, form_id: str | int):
+    def get_form_files(self, form_id: str | int) -> dict[str, Any]:
         """
         Retrieve a list of files uploaded through a form's submissions.
 
@@ -532,7 +538,7 @@ class JotformExtendedClient:
         """
         return self._make_request(f"/form/{form_id}/files")
 
-    def get_form_webhooks(self, form_id: str | int):
+    def get_form_webhooks(self, form_id: str | int) -> dict[str, Any]:
         """
         Retrieve a list of webhooks on a specific form.
 
@@ -544,7 +550,7 @@ class JotformExtendedClient:
         """
         return self._make_request(f"/form/{form_id}/webhooks")
 
-    def add_form_webhook(self, form_id: str | int, webhook_url: str):
+    def add_form_webhook(self, form_id: str | int, webhook_url: str) -> dict[str, Any]:
         """
         Add a webhook URL to a specific form.
 
@@ -560,7 +566,9 @@ class JotformExtendedClient:
             f"/form/{form_id}/webhooks", method="POST", params=payload
         )
 
-    def delete_form_webhook(self, form_id: str | int, webhook_id: str | int):
+    def delete_form_webhook(
+        self, form_id: str | int, webhook_id: str | int
+    ) -> dict[str, Any]:
         """
         Delete a specific webhook from a form.
 
@@ -582,7 +590,7 @@ class JotformExtendedClient:
         limit: str | int = 20,
         filter: str = "{}",
         orderby: str = "id",
-    ):
+    ) -> dict[str, Any]:
         """
         Retrieve submissions of a specific form.
 
@@ -607,7 +615,9 @@ class JotformExtendedClient:
         }
         return self._make_request(f"/form/{form_id}/submissions", params=payload)
 
-    def create_submission(self, form_id: str | int, submission_data: dict[str, str]):
+    def create_submission(
+        self, form_id: str | int, submission_data: dict[str, str]
+    ) -> dict[str, Any]:
         """
         Create a new submission for a specific form.
 
@@ -630,7 +640,7 @@ class JotformExtendedClient:
             f"/form/{form_id}/submissions", method="POST", params=submission_data
         )
 
-    def get_submission(self, submission_id: str | int):
+    def get_submission(self, submission_id: str | int) -> dict[str, Any]:
         """
         Retrieve a specific submission by its ID.
 
@@ -644,7 +654,7 @@ class JotformExtendedClient:
 
     def update_submission(
         self, submission_id: str | int, submission_data: dict[str, str]
-    ):
+    ) -> dict[str, Any]:
         """
         Update the details of a specific submission.
 
@@ -665,7 +675,7 @@ class JotformExtendedClient:
             f"/submission/{submission_id}", method="POST", params=submission_data
         )
 
-    def delete_submission(self, submission_id: str | int):
+    def delete_submission(self, submission_id: str | int) -> dict[str, Any]:
         """
         Permanently delete a specific submission.
 
@@ -680,7 +690,7 @@ class JotformExtendedClient:
         """
         return self._make_request(f"/submission/{submission_id}", method="DELETE")
 
-    def get_report(self, report_id: str | int):
+    def get_report(self, report_id: str | int) -> dict[str, Any]:
         """
         Retrieve the details of a specific report by its ID.
 
@@ -692,7 +702,7 @@ class JotformExtendedClient:
         """
         return self._make_request(f"/report/{report_id}")
 
-    def delete_report(self, report_id: str | int):
+    def delete_report(self, report_id: str | int) -> dict[str, Any]:
         """
         Permanently delete a specific report.
 
@@ -707,7 +717,7 @@ class JotformExtendedClient:
         """
         return self._make_request(f"/report/{report_id}", method="DELETE")
 
-    def get_folder(self, folder_id: str):
+    def get_folder(self, folder_id: str) -> dict[str, Any]:
         """
         Retrieve a specific folder and its contents.
 
@@ -724,7 +734,7 @@ class JotformExtendedClient:
         folder_name: str,
         parent_folder_id: Optional[str] = None,
         folder_color: Optional[str] = None,
-    ):
+    ) -> dict[str, Any]:
         """
         Create a new folder with the specified name, optionally under a parent folder, and with a specified folder color.
 
@@ -744,7 +754,7 @@ class JotformExtendedClient:
         }
         return self._make_request("/folder", method="POST", params=payload)
 
-    def delete_folder(self, folder_id: str):
+    def delete_folder(self, folder_id: str) -> dict[str, Any]:
         """
         Permanently delete a specific folder.
 
@@ -756,7 +766,7 @@ class JotformExtendedClient:
         """
         return self._make_request(f"/folder/{folder_id}", method="DELETE")
 
-    def get_plan(self, plan_name: str):
+    def get_plan(self, plan_name: str) -> dict[str, Any]:
         """
         Retrieve usage limits and pricing details for a specific plan.
 
@@ -769,7 +779,7 @@ class JotformExtendedClient:
         """
         return self._make_request(f"/system/plan/{plan_name}")
 
-    def get_apps(self):
+    def get_apps(self) -> dict[str, Any]:
         """
         Retrieve a list of apps with basic information available for the current Jotform account.
 
@@ -778,7 +788,7 @@ class JotformExtendedClient:
         """
         return self._make_request("/user/portals")
 
-    def get_app(self, app_id: str | int):
+    def get_app(self, app_id: str | int) -> dict[str, Any]:
         """
         Retrieve detailed information about a specific app.
 
@@ -790,7 +800,7 @@ class JotformExtendedClient:
         """
         return self._make_request(f"/portal/{app_id}")
 
-    def archive_form(self, form_id: str | int):
+    def archive_form(self, form_id: str | int) -> dict[str, Any]:
         """
         Archive a specific form.
 
@@ -802,7 +812,7 @@ class JotformExtendedClient:
         """
         return self._make_request(f"/form/{form_id}/archive?archive=1", method="POST")
 
-    def unarchive_form(self, form_id: str | int):
+    def unarchive_form(self, form_id: str | int) -> dict[str, Any]:
         """
         Unarchive a specific form.
 
@@ -814,7 +824,7 @@ class JotformExtendedClient:
         """
         return self._make_request(f"/form/{form_id}/archive?archive=0", method="POST")
 
-    def get_submission_thread(self, submission_id: str | int):
+    def get_submission_thread(self, submission_id: str | int) -> dict[str, Any]:
         """
         Retrieve the thread (workflow updates, comments, emails) associated with a specific submission.
 
@@ -831,7 +841,7 @@ class JotformExtendedClient:
         form_id: str | int,
         submission_id: str | int,
         pdf_id: Optional[str | int] = None,
-    ):
+    ) -> dict[str, Any]:
         """
         Generate a PDF for a specific submission of a form.
 
@@ -851,7 +861,7 @@ class JotformExtendedClient:
         }
         return self._make_request("/generatePDF", params=pdf_data)
 
-    def get_agents(self):
+    def get_agents(self) -> dict[str, Any]:
         """
         Retrieve a list of AI Agents associated with the current Jotform account.
 
@@ -860,7 +870,7 @@ class JotformExtendedClient:
         """
         return self._make_request("/ai-agent-builder/agents")
 
-    def get_agent(self, agent_id: str):
+    def get_agent(self, agent_id: str) -> dict[str, Any]:
         """
         Retrieve detailed information about a specific AI Agent by its ID.
 
@@ -872,7 +882,7 @@ class JotformExtendedClient:
         """
         return self._make_request(f"/ai-agent-builder/agents/{agent_id}")
 
-    def get_sender_emails(self):
+    def get_sender_emails(self) -> dict[str, Any]:
         """
         Retrieve the list of sender email addresses configured for the current Jotform account.
 
