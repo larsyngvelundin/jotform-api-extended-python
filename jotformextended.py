@@ -740,7 +740,7 @@ class JotformExtendedClient:
         Args:
             form_id (str or int): The ID of the form associated with the submission.
             submission_id (str or int): The ID of the submission for which to generate the PDF.
-            pdf_id (Optional[str or int], optional): The ID of a specific PDF template to use.
+            pdf_id (str or int, optional): The ID of a specific PDF template to use.
                 If None, the default PDF template will be used. Defaults to None.
 
         Returns:
