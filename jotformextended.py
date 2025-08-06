@@ -648,7 +648,13 @@ class JotformExtendedClient:
 
     def delete_folder(self, folder_id: str):
         """
-        Delete a folder.
+        Permanently delete a specific folder.
+
+        Args:
+            folder_id (str): The ID of the folder to delete.
+
+        Returns:
+            dict: Parsed JSON response from the API confirming the deletion of the folder.
         """
         return self._make_request(f"/folder/{folder_id}", method="DELETE")
 
