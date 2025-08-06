@@ -476,7 +476,22 @@ class JotformExtendedClient:
 
     def create_submission(self, form_id: str | int, submission_data: dict[str, str]):
         """
-        Create a submission.
+        Create a new submission for a specific form.
+
+        Args:
+            form_id (str or int): The ID of the form to which the submission will be added.
+            submission_data (dict[str, str]): A dictionary containing the submission field data.
+                Each key is a field identifier in the format "submission[field_id]", and each value is the submitted value.
+
+                Example structure:
+                    {
+                        "submission[2]": "Lorem",
+                        "submission[3]": "Ipsum",
+                        "submission[4]": "100",
+                    }
+
+        Returns:
+            dict: Parsed JSON response from the API confirming the creation of the submission and containing its details, including Submission ID.
         """
         return self._make_request(
             f"/form/{form_id}/submissions", method="POST", params=submission_data
