@@ -276,7 +276,14 @@ class JotformExtendedClient:
 
     def get_form_field(self, form_id: str | int, field_id: str | int):
         """
-        Get properties for a specific field.
+        Retrieve properties of a specific field within a form.
+
+        Args:
+            form_id (str or int): The ID of the form containing the field.
+            field_id (str or int): The ID of the specific field whose properties are being requested.
+
+        Returns:
+            dict: Parsed JSON response from the API containing the properties of the specified field.
         """
         return self._make_request(f"/form/{form_id}/question/{field_id}")
 
