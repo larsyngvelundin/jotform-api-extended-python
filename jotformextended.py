@@ -92,14 +92,35 @@ class JotformExtendedClient:
         """
         return self._make_request("/user/usage")
 
-    def get_user_submissions(self):
+    def get_user_submissions(
+        self,
+        offset: str | int = 0,
+        limit: str | int = 20,
+        filter: str = "{}",
+        orderby: str = "id",
+    ):
         """
-        Retrieves a list of submissions made by the current Jotform account.
+        Retrieve a list of submissions made by the current Jotform account with pagination, filtering, and sorting options.
+
+        Args:
+            offset (str or int, optional): The starting position of the submissions to retrieve for pagination. Defaults to 0.
+            limit (str or int, optional): The maximum number of submissions to retrieve. Defaults to 20. Maximum is 1000.
+            filter (str, optional): A JSON string used to filter submissions.
+                For example: '{"formIDs":["242943775123456"]}'. Defaults to an empty filter '{}'.
+            orderby (str, optional): The field by which to sort the submissions.
+                Supported values are: 'id', 'form_id', 'IP', 'created_at', 'status', 'new', 'flag', 'updated_at'.
+                Defaults to 'id'.
 
         Returns:
-            dict: A dictionary containing a list of submission records submitted by the user.
+            dict: Parsed JSON response from the API containing a dictionary with a list of submission records submitted by the user.
         """
-        return self._make_request("/user/submissions")
+        payload: dict[str, str] = {
+            "offset": str(offset),
+            "limit": str(limit),
+            "filter": filter,
+            "orderby": orderby,
+        }
+        return self._make_request("/user/submissions", params=payload)
 
     def get_user_subusers(self):
         """
