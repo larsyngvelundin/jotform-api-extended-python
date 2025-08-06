@@ -291,7 +291,20 @@ class JotformExtendedClient:
         self, form_id: str | int, field_id: str | int, field_details: dict[str, str]
     ):
         """
-        Update a form field.
+        Update the properties of a specific field within a form.
+
+        Args:
+            form_id (str or int): The ID of the form containing the field to update.
+            field_id (str or int): The ID of the field to be updated.
+            field_details (dict[str, str]): A dictionary containing the updated field properties.
+                Example structure:
+                    {
+                        "question[text]": "New label text",
+                        "question[order]": "2",
+                    }
+
+        Returns:
+            dict: Parsed JSON response from the API confirming the update and showing the updated field details.
         """
         return self._make_request(
             f"/form/{form_id}/question/{field_id}", method="POST", params=field_details
