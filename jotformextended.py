@@ -312,7 +312,14 @@ class JotformExtendedClient:
 
     def delete_form_field(self, form_id: str | int, field_id: str | int):
         """
-        Delete a field.
+        Delete a specific field from a form.
+
+        Args:
+            form_id (str or int): The ID of the form containing the field to delete.
+            field_id (str or int): The ID of the field to be deleted.
+
+        Returns:
+            dict: Parsed JSON response from the API confirming the deletion.
         """
         return self._make_request(
             f"/form/{form_id}/question/{field_id}", method="DELETE"
