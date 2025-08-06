@@ -403,7 +403,13 @@ class JotformExtendedClient:
 
     def get_form_reports(self, form_id: str | int):
         """
-        Get list of reports of a form.
+        Retrieve a list of reports associated with a specific form.
+
+        Args:
+            form_id (str or int): The ID of the form whose reports are being requested.
+
+        Returns:
+            dict: Parsed JSON response from the API containing the list of reports and their details.
         """
         return self._make_request(f"/form/{form_id}/reports")
 
