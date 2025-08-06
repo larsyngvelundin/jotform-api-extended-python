@@ -421,7 +421,13 @@ class JotformExtendedClient:
 
     def get_form_webhooks(self, form_id: str | int):
         """
-        Get list of webhooks of a form.
+        Retrieve a list of webhooks on a specific form.
+
+        Args:
+            form_id (str or int): The ID of the form whose webhooks are being requested.
+
+        Returns:
+            dict: Parsed JSON response from the API containing the list of webhooks and their details.
         """
         return self._make_request(f"/form/{form_id}/webhooks")
 
