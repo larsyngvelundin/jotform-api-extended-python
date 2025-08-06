@@ -513,7 +513,20 @@ class JotformExtendedClient:
         self, submission_id: str | int, submission_data: dict[str, str]
     ):
         """
-        Edit a submission.
+        Update the details of a specific submission.
+
+        Args:
+            submission_id (str or int): The ID of the submission to update.
+            submission_data (dict[str, str]): A dictionary containing the updated submission field data.
+                Each key is a field identifier in the format "submission[field_id]", and each value is the updated field value.
+
+                Example structure:
+                    {
+                        "submission[2]": "new answer",
+                    }
+
+        Returns:
+            dict: Parsed JSON response from the API confirming the update and containing the updated submission details.
         """
         return self._make_request(
             f"/submission/{submission_id}", method="POST", params=submission_data
