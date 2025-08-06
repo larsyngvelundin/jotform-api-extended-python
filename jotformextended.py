@@ -499,7 +499,13 @@ class JotformExtendedClient:
 
     def get_submission(self, submission_id: str | int):
         """
-        Get a submission.
+        Retrieve a specific submission by its ID.
+
+        Args:
+            submission_id (str or int): The ID of the submission to retrieve.
+
+        Returns:
+            dict: Parsed JSON response from the API containing the details of the specified submission.
         """
         return self._make_request(f"/submission/{submission_id}")
 
