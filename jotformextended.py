@@ -733,16 +733,23 @@ class JotformExtendedClient:
         form_id: str | int,
         submission_id: str | int,
         pdf_id: Optional[str | int] = None,
-        download: Optional[str | int] = 0,
     ):
         """
-        Generate a submission PDF.
+        Generate a PDF for a specific submission of a form.
+
+        Args:
+            form_id (str or int): The ID of the form associated with the submission.
+            submission_id (str or int): The ID of the submission for which to generate the PDF.
+            pdf_id (Optional[str or int], optional): The ID of a specific PDF template to use.
+                If None, the default PDF template will be used. Defaults to None.
+
+        Returns:
+            dict: Parsed JSON response from the API containing a download link to the generated PDF.
         """
         pdf_data: dict[str, Any] = {
             "formid": form_id,
             "submissionid": submission_id,
             "reportid": pdf_id,
-            "download": download,
         }
         return self._make_request("/generatePDF", params=pdf_data)
 
