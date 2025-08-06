@@ -212,7 +212,7 @@ class JotformExtendedClient:
             form_id (str or int): ID of the form.
 
         Returns:
-            dict: Parsed JSON response from the API.
+            dict: A dictionary containing the parsed JSON response from the API.
         """
         return self._make_request(f"/form/{form_id}")
 
