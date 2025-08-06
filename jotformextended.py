@@ -755,7 +755,10 @@ class JotformExtendedClient:
 
     def get_agents(self):
         """
-        Get a list of AI Agents on this Jotform account.
+        Retrieve a list of AI Agents associated with the current Jotform account.
+
+        Returns:
+            dict: Parsed JSON response from the API containing the list of AI Agents and their details.
         """
         return self._make_request("/ai-agent-builder/agents")
 
