@@ -575,17 +575,37 @@ class JotformExtendedClient:
             f"/form/{form_id}/webhooks/{webhook_id}", method="DELETE"
         )
 
-    def get_form_submissions(self, form_id: str | int):
+    def get_form_submissions(
+        self,
+        form_id: str | int,
+        offset: str | int = 0,
+        limit: str | int = 20,
+        filter: str = "{}",
+        orderby: str = "id",
+    ):
         """
         Retrieve submissions of a specific form.
 
         Args:
             form_id (str or int): The ID of the form whose submissions are being requested.
+            offset (str or int, optional): The starting position of the submissions to retrieve for pagination. Defaults to 0.
+            limit (str or int, optional): The maximum number of submissions to retrieve. Defaults to 20. Maximum is 1000.
+            filter (str, optional): A JSON string used to filter submissions.
+                For example: '{"created_at:gt":"2025-01-01 00:00:00"}'. Defaults to an empty filter '{}'.
+            orderby (str, optional): The field by which to sort the submissions.
+                Supported values are: 'id', 'IP', 'created_at', 'status', 'new', 'flag', 'updated_at'.
+                Defaults to 'id'.
 
         Returns:
             dict: Parsed JSON response from the API containing the form submissions.
         """
-        return self._make_request(f"/form/{form_id}/submissions")
+        payload: dict[str, str] = {
+            "offset": str(offset),
+            "limit": str(limit),
+            "filter": filter,
+            "orderby": orderby,
+        }
+        return self._make_request(f"/form/{form_id}/submissions", params=payload)
 
     def create_submission(self, form_id: str | int, submission_data: dict[str, str]):
         """
