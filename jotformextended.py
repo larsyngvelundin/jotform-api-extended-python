@@ -75,10 +75,25 @@ class JotformExtendedClient:
 
         return json.loads(response.text)
 
-    def get_team_id(self):
-        return self.__team_id
+    def get_team_id(self) -> str:
+        """
+        Retrieve the currently sert Team ID.
 
-    def set_team_id(self, team_id: str | int):
+        Returns:
+            str: The Team ID as a string.
+        """
+        return str(self.__team_id)
+
+    def set_team_id(self, team_id: str | int) -> str:
+        """
+        Set the Team ID for the instance.
+
+        Args:
+            team_id (str or int): The team ID to use for requests.
+
+        Returns:
+            str: Confirmation message indicating the team ID has been set.
+        """
         self.__team_id = team_id
         return f"Team ID is set to {self.__team_id}"
 
