@@ -13,7 +13,7 @@ class JotformExtendedClient:
         self,
         api_key: str,
         subdomain: str = "api",
-        team_id: Optional[str] = None,
+        team_id: Optional[str | int] = None,
         debug: bool = False,
     ):
         """Initialize an Extended Jotform API client.
@@ -25,6 +25,7 @@ class JotformExtendedClient:
                     - 'api': Default subdomain for general Jotform API calls.
                     - 'eu': Use for accounts on the European Datacenter.
                     - 'hipaa': Use for HIPAA-compliant accounts.
+            team_id (str or int, optional): Team ID for interacting with Team Workspaces (default: None)
             debug (bool, optional): Enable debug output (default: False).
         """
         self.__api_key = api_key
