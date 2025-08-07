@@ -23,6 +23,7 @@ API coverage:
 | Report | ✔️ | ✔️ |
 | Folder | ✔️ | ✔️ |
 | System | ✔️ | ✔️ |
+| Teams | ❌ | ✔️ |
 | Apps | ❌ | ✔️ |
 | Form Archive | ❌ | ✔️ |
 | Submission Threads | ❌ | ✔️ |
