@@ -927,13 +927,22 @@ class JotformExtendedClient:
         self,
         offset: str | int = 0,
         limit: str | int = 20,
-        filter: str = "{}",
         orderby: str = "id",
     ) -> dict[str, Any]:
+        """
+        Retrieve a list of teams associated with the current user, with support for pagination and sorting.
+
+        Args:
+            offset (str or int, optional): The starting position of the teams to retrieve for pagination. Defaults to 0.
+            limit (str or int, optional): The maximum number of teams to retrieve. Defaults to 20.
+            orderby (str, optional): The field by which to sort the teams.
+
+        Returns:
+            dict: Parsed JSON response from the API containing a dictionary with a list of teams associated with the user.
+        """
         payload: dict[str, str] = {
             "offset": str(offset),
             "limit": str(limit),
-            "filter": filter,
             "orderby": orderby,
         }
         return self._make_request("/team/user/me", params=payload)
