@@ -78,7 +78,7 @@ class JotformExtendedClient:
 
     def get_team_id(self) -> str:
         """
-        Retrieve the currently sert Team ID.
+        Retrieve the currently set Team ID.
 
         Returns:
             str: The Team ID as a string.
