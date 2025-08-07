@@ -9,7 +9,13 @@ class JotformExtendedClient:
     SUBDOMAINS = {"api": "api", "eu": "eu-api", "hipaa": "hipaa-api"}
     INTERNAL_SUBDOMAINS = {"api": "www", "eu": "eu", "hipaa": "hipaa"}
 
-    def __init__(self, api_key: str, subdomain: str = "api", debug: bool = False):
+    def __init__(
+        self,
+        api_key: str,
+        subdomain: str = "api",
+        team_id: Optional[str | int] = None,
+        debug: bool = False,
+    ):
         """Initialize an Extended Jotform API client.
 
         Args:
@@ -19,9 +25,11 @@ class JotformExtendedClient:
                     - 'api': Default subdomain for general Jotform API calls.
                     - 'eu': Use for accounts on the European Datacenter.
                     - 'hipaa': Use for HIPAA-compliant accounts.
+            team_id (str or int, optional): Team ID for interacting with Team Workspaces (default: None)
             debug (bool, optional): Enable debug output (default: False).
         """
         self.__api_key = api_key
+        self.__team_id = team_id
         self.__is_debug = debug
         self.__base_url = f"https://{self.SUBDOMAINS[subdomain]}.jotform.com"
         self.__internal_base_url = "https://"
@@ -46,12 +54,14 @@ class JotformExtendedClient:
         Returns:
             dict: Parsed JSON response from the API.
         """
-        headers = {"apiKey": self.__api_key}
+        headers: dict[str, Any] = {"apiKey": self.__api_key}
         if internal:
             url = self.__internal_base_url + api_path
             headers["referer"] = self.__internal_base_url
         else:
             url = self.__base_url + api_path
+        if self.__team_id:
+            headers["jf-team-id"] = self.__team_id
         if params:
             response = requests.request(
                 method=method, url=url, headers=headers, params=params
@@ -62,8 +72,31 @@ class JotformExtendedClient:
         if self.__is_debug:
             print(f"Request URL: {url}")
             print(f"Method: {method}")
+            print(f"Current Team: {self.__team_id}")
 
         return json.loads(response.text)
+
+    def get_team_id(self) -> str:
+        """
+        Retrieve the currently sert Team ID.
+
+        Returns:
+            str: The Team ID as a string.
+        """
+        return str(self.__team_id)
+
+    def set_team_id(self, team_id: str | int) -> str:
+        """
+        Set the Team ID for the instance.
+
+        Args:
+            team_id (str or int): The team ID to use for requests.
+
+        Returns:
+            str: Confirmation message indicating the team ID has been set.
+        """
+        self.__team_id = team_id
+        return f"Team ID is set to {self.__team_id}"
 
     def get_user(self) -> dict[str, Any]:
         """
@@ -890,3 +923,27 @@ class JotformExtendedClient:
             dict: Parsed JSON response from the API containing the list of sender emails and their details.
         """
         return self._make_request("/smtpConfig/user/all")
+
+    def get_user_teams(
+        self,
+        offset: str | int = 0,
+        limit: str | int = 20,
+        orderby: str = "id",
+    ) -> dict[str, Any]:
+        """
+        Retrieve a list of teams associated with the current user, with support for pagination and sorting.
+
+        Args:
+            offset (str or int, optional): The starting position of the teams to retrieve for pagination. Defaults to 0.
+            limit (str or int, optional): The maximum number of teams to retrieve. Defaults to 20.
+            orderby (str, optional): The field by which to sort the teams.
+
+        Returns:
+            dict: Parsed JSON response from the API containing a dictionary with a list of teams associated with the user.
+        """
+        payload: dict[str, str] = {
+            "offset": str(offset),
+            "limit": str(limit),
+            "orderby": orderby,
+        }
+        return self._make_request("/team/user/me", params=payload)
