@@ -947,3 +947,15 @@ class JotformExtendedClient:
             "orderby": orderby,
         }
         return self._make_request("/team/user/me", params=payload)
+
+    def start_workflow(self, submission_id: str | int) -> dict[str, Any]:
+        """
+        Start the workflow for a submission.
+
+        Args:
+            submission_id (str or int): The submission ID to start the workflow for.
+
+        Returns:
+            dict: Parsed JSON response from the API with information about the workflow status.
+        """
+        return self._make_request(f"/workflow/submission/{submission_id}/start")

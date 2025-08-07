@@ -27,6 +27,7 @@ API coverage:
 | Apps | ❌ | ✔️ |
 | Form Archive | ❌ | ✔️ |
 | Submission Threads | ❌ | ✔️ |
+| Start Workflow | ❌ | ✔️ |
 | PDFs | ❌ | ✔️ |
 | AI Agents | ❌ | ✔️ |
 | SMTP | ❌ | ✔️ |
